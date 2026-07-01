@@ -6,7 +6,6 @@ import { getFeaturedProducts } from "@/constants/products";
 import { formatPrice } from "@/lib/utils";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { Section } from "@/components/common/section";
-import { SectionLinkAction } from "@/components/common/section-header";
 import { MotionStagger, MotionItem } from "@/components/common/motion-wrapper";
 import { PremiumImage } from "@/components/common/premium-image";
 import { Badge } from "@/components/ui/badge";
@@ -41,7 +40,7 @@ export function ProductCard({
           </div>
           <button
             onClick={() => toggleWishlist(product.id)}
-            className="absolute right-3 top-3 rounded-[var(--radius-full)] surface-glass p-2 shadow-subtle transition-luxury hover:scale-105"
+            className="absolute right-3 top-3 rounded-[var(--radius-full)] surface-glass p-2 opacity-0 shadow-subtle transition-luxury group-hover:opacity-100 hover:scale-105"
             aria-label={isWishlisted(product.id) ? "Remove from wishlist" : "Add to wishlist"}
           >
             <Heart
@@ -55,12 +54,12 @@ export function ProductCard({
         <div className="mt-4 space-y-1">
           <Link
             href={`/product/${product.slug}`}
-            className="text-sm font-medium transition-luxury hover:text-muted-foreground"
+            className="font-display text-base font-light transition-luxury hover:text-muted-foreground"
           >
             {product.name}
           </Link>
           <div className="flex items-center gap-2">
-            <span className="text-sm">{formatPrice(product.price)}</span>
+            <span className="text-sm tracking-wide">{formatPrice(product.price)}</span>
             {product.compareAtPrice && (
               <span className="text-sm text-muted-foreground line-through">
                 {formatPrice(product.compareAtPrice)}
@@ -78,29 +77,13 @@ export function FeaturedProducts() {
 
   return (
     <Section
-      background="muted"
+      spacing="lg"
+      background="default"
       eyebrow="Featured"
       title="Editor's Selection"
+      description="Handpicked pieces defining the season."
     >
       <MotionStagger className="grid grid-cols-2 gap-[var(--grid-gap)] md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </MotionStagger>
-    </Section>
-  );
-}
-
-export function BestSellers() {
-  const products = getFeaturedProducts().slice(0, 4);
-
-  return (
-    <Section
-      eyebrow="Popular"
-      title="Best Sellers"
-      action={<SectionLinkAction href="/shop?sort=popular" label="View All" />}
-    >
-      <MotionStagger className="grid grid-cols-2 gap-[var(--grid-gap)] lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

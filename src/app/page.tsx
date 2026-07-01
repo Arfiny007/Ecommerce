@@ -1,12 +1,12 @@
 import { HeroSection } from "@/components/home/hero-section";
 import { FeaturedCollections } from "@/components/home/featured-collections";
-import { FeaturedProducts, BestSellers } from "@/components/home/featured-products";
-import {
-  LookbookSection,
-  EditorialSection,
-  BrandStory,
-} from "@/components/home/lookbook-section";
-import { Testimonials, NewsletterSection } from "@/components/home/testimonials";
+import { FeaturedProducts } from "@/components/home/featured-products";
+import { HorizontalLookbook } from "@/components/home/horizontal-lookbook";
+import { EditorialStorySection } from "@/components/home/editorial-story-section";
+import { BrandStory } from "@/components/home/brand-story-section";
+import { BestSellers } from "@/components/home/best-sellers-section";
+import { Testimonials } from "@/components/home/testimonials-carousel";
+import { NewsletterSection } from "@/components/home/newsletter-section";
 
 export default function HomePage() {
   return (
@@ -14,8 +14,8 @@ export default function HomePage() {
       <HeroSection />
       <FeaturedCollections />
       <FeaturedProducts />
-      <LookbookSection />
-      <EditorialSection />
+      <HorizontalLookbook />
+      <EditorialStorySection />
       <BrandStory />
       <BestSellers />
       <Testimonials />
