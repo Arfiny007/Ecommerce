@@ -1,5 +1,3 @@
-import { supportEmail } from "@/constants/branding";
-
 export const FOOTER_SECTION_LABELS = {
   shop: "Shop",
   company: "Company",
@@ -75,12 +73,16 @@ export const MAIN_NAV: NavItem[] = [
     ],
   },
   {
-    label: "Editorial",
-    href: "/#editorial",
+    label: "Lookbook",
+    href: "/lookbook",
+  },
+  {
+    label: "Journal",
+    href: "/journal",
   },
   {
     label: "About",
-    href: "/#story",
+    href: "/about",
   },
 ];
 
@@ -90,19 +92,29 @@ export const FOOTER_NAV = {
     { label: "New Arrivals", href: "/shop?sort=newest" },
     { label: "Best Sellers", href: "/shop?sort=popular" },
     { label: "Gift Guide", href: "/shop?collection=gifts" },
+    { label: "Lookbook", href: "/lookbook" },
   ],
   company: [
-    { label: "Our Story", href: "/#story" },
-    { label: "Sustainability", href: "/#story" },
-    { label: "Careers", href: "#" },
-    { label: "Press", href: "#" },
+    { label: "Our Story", href: "/about" },
+    { label: "Journal", href: "/journal" },
+    { label: "Store Locations", href: "/stores" },
+    { label: "Careers", href: "/careers" },
+    { label: "Press", href: "/press" },
   ],
   customerCare: [
-    { label: "My Account", href: "/profile" },
-    { label: "Contact", href: `mailto:${supportEmail}` },
-    { label: "Shipping", href: "#" },
-    { label: "Returns & Exchanges", href: "#" },
-    { label: "Size Guide", href: "#" },
-    { label: "FAQ", href: "#" },
+    { label: "Client Services", href: "/support" },
+    { label: "Contact", href: "/contact" },
+    { label: "Shipping", href: "/shipping" },
+    { label: "Returns & Exchanges", href: "/returns" },
+    { label: "Size Guide", href: "/size-guide" },
+    { label: "FAQ", href: "/faq" },
   ],
 } as const;
+
+export const FOOTER_LEGAL = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Cookies", href: "/cookies" },
+] as const;
+
+export const LEGAL_LINKS = FOOTER_LEGAL;

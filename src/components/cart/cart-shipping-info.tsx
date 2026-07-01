@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { BOUTIQUE_ADDRESS } from "@/constants/checkout";
 import { supportEmail } from "@/constants/branding";
+import { SHIPPING_POLICY, RETURNS_POLICY } from "@/constants/content/policies";
 import { FREE_SHIPPING_THRESHOLD } from "@/constants/site";
 import { formatPrice } from "@/lib/utils";
 
@@ -24,17 +26,34 @@ export function CartShippingInfo() {
         <AccordionItem value="delivery">
           <AccordionTrigger>Delivery &amp; Returns</AccordionTrigger>
           <AccordionContent>
-            Complimentary standard shipping on orders over{" "}
-            {formatPrice(FREE_SHIPPING_THRESHOLD)}. Express and overnight options
-            available at checkout. 30-day returns on unworn items with original
-            tags.
+            {SHIPPING_POLICY.sections[0].body}{" "}
+            {RETURNS_POLICY.sections[0].body}{" "}
+            <Link href="/shipping" className="underline underline-offset-4 hover:text-foreground">
+              Full shipping policy
+            </Link>
+            {" · "}
+            <Link href="/returns" className="underline underline-offset-4 hover:text-foreground">
+              Returns policy
+            </Link>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="boutique">
           <AccordionTrigger>Boutique Pickup</AccordionTrigger>
           <AccordionContent>
             Collect your order from our flagship at {BOUTIQUE_ADDRESS}. You will
-            receive a notification when your pieces are ready.
+            receive a notification when your pieces are ready — typically within
+            24 hours.{" "}
+            <Link href="/stores" className="underline underline-offset-4 hover:text-foreground">
+              View all boutiques
+            </Link>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="threshold">
+          <AccordionTrigger>Complimentary Shipping</AccordionTrigger>
+          <AccordionContent>
+            Complimentary standard shipping on orders over{" "}
+            {formatPrice(FREE_SHIPPING_THRESHOLD)}. Express delivery available
+            at checkout.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="contact">
@@ -47,7 +66,10 @@ export function CartShippingInfo() {
             >
               {supportEmail}
             </a>
-            .
+            .{" "}
+            <Link href="/support" className="underline underline-offset-4 hover:text-foreground">
+              Client Services
+            </Link>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

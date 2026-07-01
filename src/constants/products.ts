@@ -9,7 +9,7 @@ export const PRODUCTS: Product[] = [
     slug: "cashmere-overcoat",
     name: "Cashmere Overcoat",
     description:
-      "Double-faced cashmere overcoat with relaxed tailoring and horn buttons. Crafted in Italy from the finest Mongolian cashmere.",
+      "A study in proportion and warmth — our double-faced Mongolian cashmere overcoat features relaxed tailoring, horn buttons, and a fully lined Bemberg cupro interior. Crafted in Italy for winters that demand both elegance and ease.",
     price: 1890,
     compareAtPrice: 2200,
     category: "ready-to-wear",
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     slug: "silk-crepe-blouse",
     name: "Silk Crepe Blouse",
     description:
-      "Fluid silk crepe blouse with concealed placket and mother-of-pearl buttons. An essential silhouette reimagined.",
+      "An essential silhouette reimagined in fluid silk crepe de chine — concealed placket, mother-of-pearl buttons, and French seams throughout. The piece that elevates everything beneath it.",
     price: 680,
     category: "ready-to-wear",
     collection: "essentials",
@@ -70,7 +70,7 @@ export const PRODUCTS: Product[] = [
     slug: "leather-crossbody",
     name: "Leather Crossbody",
     description:
-      "Vegetable-tanned leather crossbody with brushed gold hardware. Hand-stitched in Florence.",
+      "Vegetable-tanned leather crossbody with brushed gold hardware, hand-stitched in Florence. Designed to develop a patina unique to its owner — a companion for years, not seasons.",
     price: 1250,
     category: "accessories",
     collection: "essentials",
@@ -93,7 +93,7 @@ export const PRODUCTS: Product[] = [
     slug: "wool-trousers",
     name: "Wool Tailored Trousers",
     description:
-      "High-rise wool trousers with pressed crease and side adjusters. Cut from Super 120s merino wool.",
+      "High-rise wool trousers with a pressed crease and side adjusters, cut from Super 120s merino wool. The foundation of a considered wardrobe — graphite, stone, and timeless.",
     price: 520,
     category: "ready-to-wear",
     collection: "ss26",
@@ -121,7 +121,7 @@ export const PRODUCTS: Product[] = [
     slug: "suede-loafers",
     name: "Suede Penny Loafers",
     description:
-      "Hand-lasted suede loafers with leather sole and cushioned insole. Made in Portugal.",
+      "Hand-lasted suede penny loafers with a leather sole and cushioned insole, made in Portugal. The shoe that bridges formal and casual — true to size, built to last.",
     price: 890,
     category: "footwear",
     collection: "ss26",
@@ -150,7 +150,7 @@ export const PRODUCTS: Product[] = [
     slug: "eau-de-parfum",
     name: "Eau de Parfum No. 7",
     description:
-      "A composition of bergamot, iris, and white musk. Created by master perfumer in Grasse.",
+      "A composition of bergamot, iris, and white musk — created by a master perfumer in Grasse. Eau de parfum concentration designed to linger on skin like memory.",
     price: 320,
     category: "fragrance",
     collection: "limited",
@@ -173,7 +173,7 @@ export const PRODUCTS: Product[] = [
     slug: "linen-shirt",
     name: "Linen Camp Collar Shirt",
     description:
-      "Relaxed camp collar shirt in washed Belgian linen. Breathable and effortlessly refined.",
+      "Relaxed camp collar shirt in washed Belgian linen — breathable, effortlessly refined, and pre-softened for that lived-in feel from the first wear.",
     price: 380,
     category: "ready-to-wear",
     collection: "ss26",
@@ -200,7 +200,7 @@ export const PRODUCTS: Product[] = [
     slug: "ceramic-vessel",
     name: "Ceramic Vessel",
     description:
-      "Hand-thrown stoneware vessel with matte glaze. A sculptural object for the considered home.",
+      "Hand-thrown stoneware vessel with a matte glaze — a sculptural object for the considered home. Natural variations celebrate the artisan process.",
     price: 240,
     category: "home",
     collection: "essentials",
@@ -219,17 +219,17 @@ export const PRODUCTS: Product[] = [
 export const SHOP_MAX_PRICE = 2500;
 
 export const CATEGORIES = [
-  { slug: "ready-to-wear", label: "Ready-to-Wear", count: 4 },
-  { slug: "accessories", label: "Accessories", count: 1 },
-  { slug: "footwear", label: "Footwear", count: 1 },
-  { slug: "fragrance", label: "Fragrance", count: 1 },
-  { slug: "home", label: "Home", count: 1 },
+  { slug: "ready-to-wear", label: "Ready-to-Wear", count: 4, description: "Tailored silhouettes and refined essentials" },
+  { slug: "accessories", label: "Accessories", count: 1, description: "Finishing statements in leather and metal" },
+  { slug: "footwear", label: "Footwear", count: 1, description: "Hand-lasted shoes for movement" },
+  { slug: "fragrance", label: "Fragrance", count: 1, description: "Olfactory compositions from Grasse" },
+  { slug: "home", label: "Home", count: 1, description: "Sculptural objects for the interior" },
 ] as const;
 
 export const BRANDS = [
-  { slug: "ss26", label: "SS26 Collection" },
-  { slug: "essentials", label: "FINY Essentials" },
-  { slug: "limited", label: "Limited Edition" },
+  { slug: "ss26", label: "SS26 Collection", description: "Spring / Summer 2026 — lightness and form" },
+  { slug: "essentials", label: "FINY Essentials", description: "Permanent wardrobe foundations" },
+  { slug: "limited", label: "Limited Edition", description: "Exclusive small-batch releases" },
 ] as const;
 
 export function isProductInStock(product: Product): boolean {

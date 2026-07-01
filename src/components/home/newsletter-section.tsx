@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Mail, Sparkles } from "lucide-react";
 import { newsletter } from "@/constants/branding";
-import { NEWSLETTER_TRUST } from "@/constants/home-content";
 import { Section } from "@/components/common/section";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -99,8 +98,8 @@ export function NewsletterSection() {
         </Surface>
 
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-6">
-          {NEWSLETTER_TRUST.map((item, i) => {
-            const Icon = TRUST_ICONS[i];
+          {newsletter.perks.map((item, i) => {
+            const Icon = TRUST_ICONS[i % TRUST_ICONS.length];
             return (
               <li
                 key={item}

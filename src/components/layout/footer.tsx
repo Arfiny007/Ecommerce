@@ -10,7 +10,7 @@ import {
   footerAbout,
   brandName,
 } from "@/constants/branding";
-import { FOOTER_NAV, FOOTER_SECTION_LABELS } from "@/constants/navigation";
+import { FOOTER_NAV, FOOTER_SECTION_LABELS, FOOTER_LEGAL } from "@/constants/navigation";
 import { Logo } from "@/components/common/logo";
 import { SOCIAL_ICONS } from "@/components/common/social-icons";
 import { Container } from "@/components/common/container";
@@ -150,15 +150,15 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {brandName}. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="#" className="transition-colors hover:text-foreground">
-              Privacy
-            </Link>
-            <Link href="#" className="transition-colors hover:text-foreground">
-              Terms
-            </Link>
-            <Link href="#" className="transition-colors hover:text-foreground">
-              Cookies
-            </Link>
+            {FOOTER_LEGAL.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </Container>

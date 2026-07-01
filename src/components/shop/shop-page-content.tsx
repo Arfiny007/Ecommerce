@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { description } from "@/constants/branding";
+import { shopDescription } from "@/constants/branding";
+import { getCategoryCopy, getCollectionCopy } from "@/constants/content/catalog";
 import { SHOP_MAX_PRICE } from "@/constants/products";
 import { Section } from "@/components/common/section";
 import { Container } from "@/components/common/container";
@@ -47,6 +48,25 @@ export function ShopPageContent() {
     setIsHydrated(true);
   }, []);
 
+  const categoryParam = searchParams.get("category") || "";
+  const collectionParam = searchParams.get("collection") || "";
+
+  const pageCopy = useMemo(() => {
+    if (categoryParam) {
+      const cat = getCategoryCopy(categoryParam);
+      if (cat) {
+        return { eyebrow: "Shop", title: cat.title, body: cat.description };
+      }
+    }
+    if (collectionParam) {
+      const col = getCollectionCopy(collectionParam);
+      if (col) {
+        return { eyebrow: col.season, title: col.title, body: col.description };
+      }
+    }
+    return { eyebrow: "Shop", title: "All Products", body: shopDescription };
+  }, [categoryParam, collectionParam]);
+
   const filterPanelProps = {
     filters,
     onSearchChange: setSearch,
@@ -63,9 +83,9 @@ export function ShopPageContent() {
     <>
       <div className="border-b border-border-subtle bg-surface-muted pt-24 pb-10 md:pt-32 md:pb-14">
         <Container>
-          <Eyebrow>Shop</Eyebrow>
-          <Heading className="mt-3">All Products</Heading>
-          <Body className="mt-4 prose-width">{description}</Body>
+          <Eyebrow>{pageCopy.eyebrow}</Eyebrow>
+          <Heading className="mt-3">{pageCopy.title}</Heading>
+          <Body className="mt-4 prose-width">{pageCopy.body}</Body>
           <ShopCategoryPills
             activeCategory={filters.category}
             onCategoryChange={setCategory}

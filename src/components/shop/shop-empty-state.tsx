@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Heading, Body } from "@/components/common/typography";
 import { NoResultsIllustration } from "@/components/shop/shop-no-results-illustration";
+import { EMPTY_STATE_COPY } from "@/constants/content";
 import { emptyStates } from "@/constants/branding";
 import { fadeInUp } from "@/lib/animations";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -30,8 +31,8 @@ export function ShopEmptyState({ onClearFilters, hasFilters }: ShopEmptyStatePro
       </Heading>
       <Body className="mt-4 max-w-md">
         {hasFilters
-          ? "Refine your filters or explore our full collection."
-          : "Our collection is being curated. Please check back soon."}
+          ? EMPTY_STATE_COPY.shop.bodyFiltered
+          : EMPTY_STATE_COPY.shop.bodyDefault}
       </Body>
       {hasFilters && (
         <Button variant="luxury" className="mt-8" onClick={onClearFilters}>

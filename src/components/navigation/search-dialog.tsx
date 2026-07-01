@@ -10,8 +10,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/constants/products";
-import { emptyStates } from "@/constants/branding";
+import { EMPTY_STATE_COPY } from "@/constants/content";
+import { SearchEmptyIllustration } from "@/components/illustrations/search-empty-illustration";
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
 
@@ -32,6 +34,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
       ).slice(0, 6)
     : [];
 
+  const handleSuggestion = (term: string) => {
+    setQuery(term);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="top-[20%] max-w-2xl translate-y-0 sm:top-[15%]">
@@ -41,7 +47,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Search collections, products..."
+            placeholder="Search collections, products, materials..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="h-12 pl-10 text-base"
@@ -81,9 +87,25 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
           </div>
         )}
         {query.trim() && results.length === 0 && (
-          <p className="py-8 text-center text-sm text-muted-foreground">
-            {emptyStates.search}
-          </p>
+          <div className="py-8 text-center">
+            <SearchEmptyIllustration />
+            <p className="mt-4 text-sm font-medium">{EMPTY_STATE_COPY.search.title}</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {EMPTY_STATE_COPY.search.body}
+            </p>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {EMPTY_STATE_COPY.search.suggestions.map((term) => (
+                <Button
+                  key={term}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleSuggestion(term)}
+                >
+                  {term}
+                </Button>
+              ))}
+            </div>
+          </div>
         )}
       </DialogContent>
     </Dialog>
