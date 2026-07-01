@@ -43,6 +43,8 @@ export const storageKeys = {
   wishlist: "finy-wishlist",
   compare: "finy-compare",
   recentlyViewed: "finy-recently-viewed",
+  savedForLater: "finy-saved-for-later",
+  checkoutPrefs: "finy-checkout-prefs",
 } as const;
 
 export const brandStory = {

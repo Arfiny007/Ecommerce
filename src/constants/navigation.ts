@@ -98,6 +98,7 @@ export const FOOTER_NAV = {
     { label: "Press", href: "#" },
   ],
   customerCare: [
+    { label: "My Account", href: "/profile" },
     { label: "Contact", href: `mailto:${supportEmail}` },
     { label: "Shipping", href: "#" },
     { label: "Returns & Exchanges", href: "#" },

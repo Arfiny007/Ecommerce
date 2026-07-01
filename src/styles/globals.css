@@ -262,6 +262,10 @@
   .z-loading {
     z-index: var(--z-loading);
   }
+
+  .z-toast {
+    z-index: var(--z-toast);
+  }
 }
 
 @keyframes accordion-down {

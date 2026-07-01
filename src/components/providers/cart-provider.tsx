@@ -75,6 +75,37 @@ export function CartProvider({ children }: { children: ReactNode }) {
     [setItems]
   );
 
+  const removeItemWithUndo = useCallback(
+    (id: string): CartItem | null => {
+      let removed: CartItem | null = null;
+      setItems((prev) => {
+        const item = prev.find((i) => i.id === id);
+        if (!item) return prev;
+        removed = item;
+        return prev.filter((i) => i.id !== id);
+      });
+      return removed;
+    },
+    [setItems]
+  );
+
+  const restoreItem = useCallback(
+    (item: CartItem) => {
+      setItems((prev) => {
+        const existing = prev.find((i) => i.id === item.id);
+        if (existing) {
+          return prev.map((i) =>
+            i.id === item.id
+              ? { ...i, quantity: i.quantity + item.quantity }
+              : i
+          );
+        }
+        return [...prev, item];
+      });
+    },
+    [setItems]
+  );
+
   const updateQuantity = useCallback(
     (id: string, quantity: number) => {
       if (quantity <= 0) {
@@ -101,6 +132,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal,
       addItem,
       removeItem,
+      removeItemWithUndo,
+      restoreItem,
       updateQuantity,
       clearCart,
       openCart,
@@ -114,6 +147,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       subtotal,
       addItem,
       removeItem,
+      removeItemWithUndo,
+      restoreItem,
       updateQuantity,
       clearCart,
       openCart,

@@ -303,3 +303,24 @@ export function getProductsByIds(ids: string[]): Product[] {
     .map((id) => PRODUCTS.find((p) => p.id === id))
     .filter((p): p is Product => p !== undefined);
 }
+
+export function getAccessoryRecommendations(
+  cartProductIds: string[],
+  limit = 4
+): Product[] {
+  return PRODUCTS.filter(
+    (p) => p.category === "accessories" && !cartProductIds.includes(p.id)
+  ).slice(0, limit);
+}
+
+export function getCartRecommendations(
+  cartProductIds: string[],
+  limit = 4
+): Product[] {
+  const accessories = getAccessoryRecommendations(cartProductIds, limit);
+  if (accessories.length >= limit) return accessories;
+  const trending = getTrendingProducts(undefined, limit + 2).filter(
+    (p) => !cartProductIds.includes(p.id) && !accessories.some((a) => a.id === p.id)
+  );
+  return [...accessories, ...trending].slice(0, limit);
+}
