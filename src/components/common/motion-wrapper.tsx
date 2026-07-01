@@ -6,18 +6,38 @@ import {
   fadeInUp,
   scaleIn,
   blurReveal,
+  imageReveal,
+  textReveal,
+  slideInRight,
+  slideInLeft,
   staggerContainer,
   staggerItem,
 } from "@/lib/animations";
+import { getTransition, getViewportMargin } from "@/lib/motion-config";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
-type AnimationVariant = "fade" | "fadeUp" | "scale" | "blur" | "stagger" | "staggerItem";
+type AnimationVariant =
+  | "fade"
+  | "fadeUp"
+  | "scale"
+  | "blur"
+  | "image"
+  | "text"
+  | "slideRight"
+  | "slideLeft"
+  | "stagger"
+  | "staggerItem";
 
 const variantMap = {
   fade: fadeIn,
   fadeUp: fadeInUp,
   scale: scaleIn,
   blur: blurReveal,
+  image: imageReveal,
+  text: textReveal,
+  slideRight: slideInRight,
+  slideLeft: slideInLeft,
   stagger: staggerContainer,
   staggerItem: staggerItem,
 };
@@ -36,13 +56,15 @@ export function MotionWrapper({
   once = true,
   ...props
 }: MotionWrapperProps) {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
+      initial={reducedMotion ? false : "hidden"}
+      whileInView={reducedMotion ? undefined : "visible"}
+      viewport={{ once, margin: getViewportMargin(reducedMotion) }}
       variants={variantMap[variant]}
-      transition={{ delay }}
+      transition={{ ...getTransition(reducedMotion), delay }}
       className={cn(className)}
       {...props}
     >
@@ -57,11 +79,13 @@ export function MotionStagger({
   once = true,
   ...props
 }: HTMLMotionProps<"div"> & { once?: boolean }) {
+  const reducedMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
+      initial={reducedMotion ? false : "hidden"}
+      whileInView={reducedMotion ? undefined : "visible"}
+      viewport={{ once, margin: getViewportMargin(reducedMotion) }}
       variants={staggerContainer}
       className={cn(className)}
       {...props}

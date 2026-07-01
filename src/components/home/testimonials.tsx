@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { newsletter } from "@/constants/branding";
 import { Section } from "@/components/common/section";
-import { Heading, Eyebrow } from "@/components/common/typography";
 import { MotionStagger, MotionItem } from "@/components/common/motion-wrapper";
+import { Surface } from "@/components/common/surface";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const TESTIMONIALS = [
   {
@@ -31,28 +34,32 @@ export function Testimonials() {
   const [active, setActive] = useState(0);
 
   return (
-    <Section>
-      <Eyebrow>Testimonials</Eyebrow>
-      <Heading className="mt-3">What Our Clients Say</Heading>
-
-      <MotionStagger className="mt-12 grid gap-6 md:grid-cols-3">
+    <Section eyebrow="Testimonials" title="What Our Clients Say">
+      <MotionStagger className="grid gap-[var(--grid-gap)] md:grid-cols-3">
         {TESTIMONIALS.map((testimonial, index) => (
           <MotionItem key={index}>
             <button
               onClick={() => setActive(index)}
-              className={`w-full rounded-2xl border p-8 text-left transition-all duration-300 ${
-                active === index
-                  ? "border-foreground bg-card shadow-lg"
-                  : "border-border hover:border-foreground/30"
-              }`}
+              className="w-full text-left"
             >
-              <p className="font-display text-lg font-light leading-relaxed italic">
-                &ldquo;{testimonial.quote}&rdquo;
-              </p>
-              <div className="mt-6">
-                <p className="text-sm font-medium">{testimonial.author}</p>
-                <p className="text-xs text-muted-foreground">{testimonial.location}</p>
-              </div>
+              <Surface
+                variant={active === index ? "elevated" : "bordered"}
+                rounded="2xl"
+                padding="lg"
+                className={
+                  active === index
+                    ? "border-foreground shadow-elevated"
+                    : "hover:border-foreground/20"
+                }
+              >
+                <p className="font-display text-lg font-light leading-[var(--leading-relaxed)] italic">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div className="mt-6">
+                  <p className="text-sm font-medium">{testimonial.author}</p>
+                  <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                </div>
+              </Surface>
             </button>
           </MotionItem>
         ))}
@@ -66,48 +73,44 @@ export function NewsletterSection() {
   const [subscribed, setSubscribed] = useState(false);
 
   return (
-    <Section className="border-t border-border">
-      <div className="mx-auto max-w-2xl text-center">
-        <Eyebrow>Stay Connected</Eyebrow>
-        <Heading className="mt-4">Join the MAISON Circle</Heading>
-        <p className="mt-4 text-muted-foreground">
-          Early access to collections, exclusive events, and curated editorial content.
-        </p>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (email.trim()) {
-              setSubscribed(true);
-              setEmail("");
-            }
-          }}
-          className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center"
+    <Section
+      className="border-t border-border-subtle"
+      headerAlign="center"
+      eyebrow="Stay Connected"
+      title={newsletter.heading}
+      description={newsletter.description}
+    >
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (email.trim()) {
+            setSubscribed(true);
+            setEmail("");
+          }
+        }}
+        className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
+      >
+        <Input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={newsletter.placeholder}
+          required
+          className="flex-1"
+        />
+        <Button type="submit" variant="cta" size="lg">
+          Subscribe
+        </Button>
+      </form>
+      {subscribed && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mt-4 text-center text-sm text-muted-foreground"
         >
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-            className="h-12 flex-1 rounded-full border border-input bg-transparent px-6 text-sm focus:outline-none focus:ring-2 focus:ring-ring sm:max-w-sm"
-          />
-          <button
-            type="submit"
-            className="h-12 rounded-full bg-foreground px-8 text-xs font-medium uppercase tracking-widest text-background transition-opacity hover:opacity-90"
-          >
-            Subscribe
-          </button>
-        </form>
-        {subscribed && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-4 text-sm text-muted-foreground"
-          >
-            Welcome to the circle.
-          </motion.p>
-        )}
-      </div>
+          {newsletter.successMessage}
+        </motion.p>
+      )}
     </Section>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useMemo, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { Grid3X3, LayoutList, SlidersHorizontal } from "lucide-react";
 import { PRODUCTS, CATEGORIES } from "@/constants/products";
+import { description, emptyStates } from "@/constants/branding";
 import { Section } from "@/components/common/section";
 import { Container } from "@/components/common/container";
 import { Heading, Eyebrow, Body } from "@/components/common/typography";
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { Surface } from "@/components/common/surface";
 import type { ViewMode } from "@/types/product";
 
 const MAX_PRICE = 2500;
@@ -76,13 +78,11 @@ export function ShopPageContent() {
 
   return (
     <>
-      <div className="border-b border-border bg-secondary/20 pt-24 pb-12 md:pt-32">
+      <div className="border-b border-border-subtle bg-surface-muted pt-24 pb-12 md:pt-32">
         <Container>
           <Eyebrow>Shop</Eyebrow>
           <Heading className="mt-3">All Products</Heading>
-          <Body className="mt-4 max-w-lg">
-            Explore our complete collection of curated luxury pieces.
-          </Body>
+          <Body className="mt-4 prose-width">{description}</Body>
         </Container>
       </div>
 
@@ -95,7 +95,7 @@ export function ShopPageContent() {
                 sidebarOpen ? "block" : "hidden lg:block"
               )}
             >
-              <div className="space-y-8 rounded-2xl border border-border p-6">
+              <Surface variant="bordered" rounded="2xl" padding="md" className="space-y-8">
                 <div>
                   <h3 className="text-xs font-medium uppercase tracking-[0.15em]">
                     Search
@@ -164,9 +164,9 @@ export function ShopPageContent() {
                 </div>
 
                 <Button variant="outline" size="sm" onClick={clearFilters} className="w-full">
-                  Clear Filters
+                  {emptyStates.productsCta}
                 </Button>
-              </div>
+              </Surface>
             </aside>
 
             <div className="flex-1">
@@ -225,13 +225,13 @@ export function ShopPageContent() {
               {filteredProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
                   <Heading as="h3" className="text-2xl">
-                    No products found
+                    {emptyStates.products}
                   </Heading>
                   <Body className="mt-4">
                     Try adjusting your filters or search terms.
                   </Body>
                   <Button variant="luxury" className="mt-8" onClick={clearFilters}>
-                    Clear Filters
+                    {emptyStates.productsCta}
                   </Button>
                 </div>
               ) : (

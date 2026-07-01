@@ -1,13 +1,11 @@
 import { Suspense } from "react";
-import type { Metadata } from "next";
 import { ShopPageContent } from "@/components/shop/shop-page-content";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Container } from "@/components/common/container";
+import { createPageMetadata } from "@/lib/metadata";
+import { shopDescription } from "@/constants/branding";
 
-export const metadata: Metadata = {
-  title: "Shop",
-  description: "Explore our complete collection of curated luxury pieces.",
-};
+export const metadata = createPageMetadata("Shop", shopDescription);
 
 function ShopLoading() {
   return (

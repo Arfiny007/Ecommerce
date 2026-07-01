@@ -11,14 +11,18 @@ interface SiteLayoutProps {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <>
+    <div className="relative min-h-screen bg-background">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 bg-radial-bloom bg-noise"
+      />
       <LoadingScreen />
       <ScrollIndicator />
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="relative min-h-screen">{children}</main>
       <Footer />
       <CartDrawer />
       <BackToTop />
-    </>
+    </div>
   );
 }

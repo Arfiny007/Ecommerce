@@ -11,6 +11,7 @@ import {
 import type { CartContextValue, CartItem } from "@/types/cart";
 import type { Product, ProductColor, ProductSize } from "@/types/product";
 import { useLocalStorage } from "@/hooks/use-media-query";
+import { storageKeys } from "@/constants/branding";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
@@ -23,7 +24,7 @@ function generateCartItemId(
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useLocalStorage<CartItem[]>("maison-cart", []);
+  const [items, setItems] = useLocalStorage<CartItem[]>(storageKeys.cart, []);
   const [isOpen, setIsOpen] = useState(false);
 
   const itemCount = useMemo(

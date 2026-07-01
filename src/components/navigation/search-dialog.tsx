@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { PRODUCTS } from "@/constants/products";
+import { emptyStates } from "@/constants/branding";
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
 
@@ -81,7 +82,7 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
         )}
         {query.trim() && results.length === 0 && (
           <p className="py-8 text-center text-sm text-muted-foreground">
-            No results found for &ldquo;{query}&rdquo;
+            {emptyStates.search}
           </p>
         )}
       </DialogContent>

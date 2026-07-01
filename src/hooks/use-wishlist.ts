@@ -2,9 +2,10 @@
 
 import { useCallback, useMemo } from "react";
 import { useLocalStorage } from "@/hooks/use-media-query";
+import { storageKeys } from "@/constants/branding";
 
 export function useWishlist() {
-  const [wishlist, setWishlist] = useLocalStorage<string[]>("maison-wishlist", []);
+  const [wishlist, setWishlist] = useLocalStorage<string[]>(storageKeys.wishlist, []);
 
   const isWishlisted = useCallback(
     (productId: string) => wishlist.includes(productId),

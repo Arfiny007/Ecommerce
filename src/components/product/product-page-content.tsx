@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Minus, Plus, Star, Truck, RotateCcw, Shield } from "lucide-react";
@@ -22,6 +21,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { PremiumImage } from "@/components/common/premium-image";
+import { Surface } from "@/components/common/surface";
 import { cn } from "@/lib/utils";
 
 interface ProductPageContentProps {
@@ -62,27 +63,28 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="relative col-span-2 aspect-[4/5] overflow-hidden rounded-3xl md:col-span-1 md:row-span-2">
-                  <Image
+                <div className="col-span-2 md:col-span-1 md:row-span-2">
+                  <PremiumImage
                     src={product.images[selectedImage]}
                     alt={product.name}
-                    fill
-                    priority
-                    className="object-cover"
+                    aspectRatio="editorial"
+                    rounded="3xl"
+                    zoomOnHover={false}
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
                   />
                 </div>
                 {product.images.slice(1, 3).map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index + 1)}
-                    className="relative aspect-square overflow-hidden rounded-2xl"
+                    className="overflow-hidden rounded-[var(--radius-2xl)] ring-offset-background transition-luxury focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
-                    <Image
+                    <PremiumImage
                       src={image}
                       alt={`${product.name} view ${index + 2}`}
-                      fill
-                      className="object-cover transition-transform hover:scale-105"
+                      aspectRatio="square"
+                      rounded="2xl"
                       sizes="25vw"
                     />
                   </button>
@@ -91,7 +93,7 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="sticky top-28 space-y-8">
+              <Surface variant="elevated" rounded="3xl" padding="lg" className="sticky top-28 space-y-8">
                 <div>
                   <div className="flex gap-2">
                     {product.new && <Badge variant="champagne">New</Badge>}
@@ -203,7 +205,7 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
 
                 <motion.div whileTap={{ scale: 0.98 }}>
                   <Button
-                    variant="luxury"
+                    variant="cta"
                     size="xl"
                     className="w-full"
                     onClick={handleAddToCart}
@@ -254,16 +256,18 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-              </div>
+              </Surface>
             </div>
           </div>
         </Container>
       </div>
 
-      <Section className="border-t border-border">
-        <Eyebrow>You May Also Like</Eyebrow>
-        <Heading className="mt-3">Related Products</Heading>
-        <MotionStagger className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+      <Section
+        className="border-t border-border-subtle"
+        eyebrow="You May Also Like"
+        title="Related Products"
+      >
+        <MotionStagger className="grid grid-cols-2 gap-[var(--grid-gap)] md:grid-cols-4">
           {related.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

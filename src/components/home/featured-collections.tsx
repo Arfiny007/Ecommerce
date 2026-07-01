@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { SectionLinkAction } from "@/components/common/section-header";
 import { Section } from "@/components/common/section";
-import { Heading, Eyebrow } from "@/components/common/typography";
 import { MotionStagger, MotionItem } from "@/components/common/motion-wrapper";
+import { PremiumImage } from "@/components/common/premium-image";
 
 const COLLECTIONS = [
   {
@@ -28,39 +28,31 @@ const COLLECTIONS = [
 
 export function FeaturedCollections() {
   return (
-    <Section id="collections">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <Eyebrow>Collections</Eyebrow>
-          <Heading className="mt-3">Curated Categories</Heading>
-        </div>
-        <Link
-          href="/shop"
-          className="hidden items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground md:flex"
-        >
-          View All
-          <ArrowUpRight className="h-4 w-4" />
-        </Link>
-      </div>
-
-      <MotionStagger className="mt-12 grid gap-6 md:grid-cols-3">
+    <Section
+      eyebrow="Collections"
+      title="Curated Categories"
+      action={<SectionLinkAction href="/shop" label="View All" />}
+    >
+      <MotionStagger className="grid gap-[var(--grid-gap)] md:grid-cols-3">
         {COLLECTIONS.map((collection, index) => (
           <MotionItem key={collection.slug}>
             <Link
               href={`/shop?category=${collection.slug}`}
-              className="group relative block aspect-[3/4] overflow-hidden rounded-3xl"
+              className="group relative block overflow-hidden rounded-[var(--radius-3xl)]"
             >
-              <Image
+              <PremiumImage
                 src={`https://images.unsplash.com/${collection.image}?w=800&q=85&auto=format&fit=crop`}
                 alt={collection.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                aspectRatio="portrait"
+                rounded="3xl"
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority={index === 0}
+                overlay
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="text-xs text-white/70">{collection.count} pieces</p>
+                <p className="text-xs tracking-[var(--tracking-wide)] text-white/70">
+                  {collection.count} pieces
+                </p>
                 <h3 className="mt-1 font-display text-2xl font-light text-white md:text-3xl">
                   {collection.title}
                 </h3>

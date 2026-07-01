@@ -1,27 +1,30 @@
 import { cn } from "@/lib/utils";
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  size?: "default" | "narrow" | "wide" | "full";
+  size?: "narrow" | "default" | "wide" | "full";
+  asGrid?: boolean;
 }
 
 const sizeClasses = {
-  default: "max-w-7xl",
-  narrow: "max-w-4xl",
-  wide: "max-w-[90rem]",
-  full: "max-w-full",
+  narrow: "max-w-[var(--container-narrow)]",
+  default: "max-w-[var(--container-default)]",
+  wide: "max-w-[var(--container-wide)]",
+  full: "max-w-[var(--container-full)]",
 };
 
 export function Container({
   className,
   size = "default",
+  asGrid = false,
   children,
   ...props
 }: ContainerProps) {
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 sm:px-8 lg:px-12",
+        "mx-auto w-full px-[var(--space-5)] sm:px-[var(--space-8)] lg:px-[var(--space-12)]",
         sizeClasses[size],
+        asGrid && "grid grid-cols-12 gap-[var(--grid-gap)]",
         className
       )}
       {...props}

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Heart, ShoppingBag, Menu } from "lucide-react";
-import { SITE_NAME } from "@/constants/site";
+import { Logo } from "@/components/common/logo";
 import { MAIN_NAV } from "@/constants/navigation";
 import { useCart } from "@/components/providers/cart-provider";
 import { useWishlist } from "@/hooks/use-wishlist";
@@ -36,15 +36,15 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-navbar transition-luxury",
           scrolled || activeMenu
-            ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
+            ? "surface-glass border-b border-border-subtle shadow-subtle"
             : "bg-transparent",
           scrollDirection === "down" && scrolled && !activeMenu && "-translate-y-full"
         )}
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-20 lg:px-12">
+        <nav className="mx-auto flex h-16 max-w-[var(--container-default)] items-center justify-between px-[var(--space-5)] sm:px-[var(--space-8)] lg:h-20 lg:px-[var(--space-12)]">
           <div className="flex items-center gap-8">
             <Button
               variant="ghost"
@@ -75,12 +75,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <Link
-            href="/"
-            className="absolute left-1/2 -translate-x-1/2 font-display text-xl font-light tracking-[0.3em] md:text-2xl"
-          >
-            {SITE_NAME}
-          </Link>
+          <Logo size="md" animated className="absolute left-1/2 -translate-x-1/2" />
 
           <div className="flex items-center gap-1">
             <Button

@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { brandStory } from "@/constants/branding";
+import { Container } from "@/components/common/container";
 import { Section } from "@/components/common/section";
 import { Heading, Eyebrow, Body } from "@/components/common/typography";
 import { MotionWrapper } from "@/components/common/motion-wrapper";
+import { PremiumImage } from "@/components/common/premium-image";
 
 const LOOKBOOK_IMAGES = [
   "photo-1509631179647-0177331693ae",
@@ -16,22 +19,22 @@ const LOOKBOOK_IMAGES = [
 
 export function LookbookSection() {
   return (
-    <Section noPadding className="overflow-hidden py-16 md:py-24">
-      <div className="mb-12 px-5 sm:px-8 lg:px-12">
+    <Section noPadding containerized={false} className="overflow-hidden py-[var(--section-py-md)]">
+      <Container className="mb-12">
         <Eyebrow>Lookbook</Eyebrow>
         <Heading className="mt-3">Spring Narratives</Heading>
-      </div>
+      </Container>
 
-      <div className="flex gap-4 overflow-x-auto px-5 pb-4 hide-scrollbar sm:px-8 lg:px-12">
+      <div className="flex gap-4 overflow-x-auto px-[var(--space-5)] pb-4 hide-scrollbar sm:px-[var(--space-8)] lg:px-[var(--space-12)]">
         {LOOKBOOK_IMAGES.map((id, index) => (
           <MotionWrapper
             key={id}
-            variant="fadeUp"
-            delay={index * 0.1}
+            variant="image"
+            delay={index * 0.08}
             className="shrink-0"
           >
             <div
-              className="relative overflow-hidden rounded-3xl"
+              className="relative overflow-hidden rounded-[var(--radius-3xl)]"
               style={{
                 width: index % 2 === 0 ? "320px" : "260px",
                 height: index % 2 === 0 ? "480px" : "400px",
@@ -41,7 +44,7 @@ export function LookbookSection() {
                 src={`https://images.unsplash.com/${id}?w=640&q=85&auto=format&fit=crop`}
                 alt={`Lookbook ${index + 1}`}
                 fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
+                className="object-cover transition-luxury hover:scale-[1.04]"
                 sizes="320px"
               />
             </div>
@@ -55,19 +58,17 @@ export function LookbookSection() {
 export function EditorialSection() {
   return (
     <Section id="editorial">
-      <div className="grid items-center gap-12 lg:grid-cols-2">
-        <MotionWrapper variant="fadeUp">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-            <Image
-              src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=85&auto=format&fit=crop"
-              alt="Editorial"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <MotionWrapper variant="image" className="lg:col-span-6">
+          <PremiumImage
+            src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=85&auto=format&fit=crop"
+            alt="Editorial"
+            aspectRatio="editorial"
+            rounded="3xl"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </MotionWrapper>
-        <MotionWrapper variant="fadeUp" delay={0.2}>
+        <MotionWrapper variant="fadeUp" delay={0.15} className="lg:col-span-6">
           <Eyebrow>Editorial</Eyebrow>
           <Heading className="mt-4">
             Materiality
@@ -87,20 +88,16 @@ export function EditorialSection() {
 
 export function BrandStory() {
   return (
-    <Section id="story" className="luxury-gradient">
-      <div className="mx-auto max-w-3xl text-center">
-        <MotionWrapper variant="blur">
-          <Eyebrow>Our Story</Eyebrow>
-          <Heading className="mt-4">
-            Founded on the belief that luxury is found in restraint
-          </Heading>
-          <Body className="mx-auto mt-6 max-w-xl">
-            MAISON was established to curate a world where exceptional craftsmanship
-            meets contemporary sensibility. Every object we offer has been selected
-            for its ability to enrich daily rituals with quiet elegance.
-          </Body>
-        </MotionWrapper>
-      </div>
+    <Section
+      id="story"
+      background="gradient"
+      eyebrow={brandStory.eyebrow}
+      title={brandStory.heading}
+      headerAlign="center"
+    >
+      <MotionWrapper variant="blur" className="mx-auto max-w-2xl text-center">
+        <Body className="mx-auto prose-width">{brandStory.body}</Body>
+      </MotionWrapper>
     </Section>
   );
 }

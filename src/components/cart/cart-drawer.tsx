@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/components/providers/cart-provider";
 import { formatPrice } from "@/lib/utils";
+import { emptyStates } from "@/constants/branding";
 import { FREE_SHIPPING_THRESHOLD } from "@/constants/site";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -96,14 +97,14 @@ export function CartDrawer() {
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent className="flex w-full flex-col sm:max-w-md">
+      <SheetContent className="flex w-full flex-col surface-elevated sm:max-w-md">
         <SheetHeader>
           <SheetTitle className="font-display text-2xl font-light">
-            Your Bag
+            {emptyStates.cartBagTitle}
           </SheetTitle>
           <SheetDescription>
             {itemCount === 0
-              ? "Your bag is empty"
+              ? emptyStates.cart
               : `${itemCount} item${itemCount !== 1 ? "s" : ""}`}
           </SheetDescription>
         </SheetHeader>
@@ -111,10 +112,10 @@ export function CartDrawer() {
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
             <p className="text-sm text-muted-foreground">
-              Discover our curated collection
+              {emptyStates.cart}
             </p>
             <Button variant="luxury" onClick={closeCart} asChild>
-              <a href="/shop">Continue Shopping</a>
+              <a href="/shop">{emptyStates.cartCta}</a>
             </Button>
           </div>
         ) : (
@@ -147,7 +148,7 @@ export function CartDrawer() {
               <p className="text-xs text-muted-foreground">
                 Shipping and taxes calculated at checkout
               </p>
-              <Button variant="luxury" size="xl" className="w-full">
+              <Button variant="cta" size="xl" className="w-full">
                 Checkout
               </Button>
             </div>

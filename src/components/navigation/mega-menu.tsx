@@ -16,20 +16,20 @@ export function MegaMenu({ items, isOpen, onClose }: MegaMenuProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -8 }}
+      initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="absolute left-0 right-0 top-full border-b border-border bg-background/95 backdrop-blur-xl"
+      exit={{ opacity: 0, y: -6 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="absolute left-0 right-0 top-full border-b border-border-subtle surface-glass shadow-soft"
       onMouseLeave={onClose}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 py-10 md:grid-cols-3 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-[var(--container-default)] grid-cols-1 gap-8 px-[var(--space-8)] py-10 md:grid-cols-3 lg:grid-cols-4">
         {items.map((item) => (
           <div key={item.label} className="space-y-4">
             <Link
               href={item.href}
               onClick={onClose}
-              className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
+              className="text-[var(--text-xs)] font-medium uppercase tracking-[var(--tracking-widest)] text-muted-foreground transition-luxury hover:text-foreground"
             >
               {item.label}
             </Link>
@@ -41,11 +41,11 @@ export function MegaMenu({ items, isOpen, onClose }: MegaMenuProps) {
                       href={child.href}
                       onClick={onClose}
                       className={cn(
-                        "group block transition-colors",
+                        "group block transition-luxury",
                         child.featured && "md:col-span-2"
                       )}
                     >
-                      <span className="text-sm font-medium transition-colors group-hover:text-muted-foreground">
+                      <span className="text-sm font-medium transition-luxury group-hover:text-muted-foreground">
                         {child.label}
                       </span>
                       {child.description && (

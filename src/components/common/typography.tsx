@@ -13,7 +13,7 @@ export function Display({
   return (
     <Tag
       className={cn(
-        "font-display text-5xl font-light leading-[1.05] tracking-tight md:text-7xl lg:text-8xl",
+        "font-display font-light text-[var(--text-display)] leading-[var(--leading-tight)] tracking-[var(--tracking-tighter)]",
         className
       )}
       {...props}
@@ -32,7 +32,7 @@ export function Heading({
   return (
     <Tag
       className={cn(
-        "font-display text-3xl font-light leading-tight tracking-tight md:text-4xl lg:text-5xl",
+        "font-display text-3xl font-light leading-[var(--leading-tight)] tracking-[var(--tracking-tight)] md:text-4xl lg:text-5xl",
         className
       )}
       {...props}
@@ -51,7 +51,7 @@ export function Subheading({
   return (
     <Tag
       className={cn(
-        "text-lg font-medium tracking-wide md:text-xl",
+        "text-lg font-medium leading-[var(--leading-snug)] tracking-[var(--tracking-wide)] md:text-xl",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground",
+        "text-[var(--text-xs)] font-medium uppercase tracking-editorial text-muted-foreground",
         className
       )}
       {...props}
@@ -87,7 +87,7 @@ export function Lead({
   return (
     <p
       className={cn(
-        "text-lg leading-relaxed text-muted-foreground md:text-xl md:leading-relaxed",
+        "text-lg leading-[var(--leading-relaxed)] text-muted-foreground md:text-xl",
         className
       )}
       {...props}
@@ -104,7 +104,28 @@ export function Body({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("text-sm leading-relaxed text-muted-foreground md:text-base", className)}
+      className={cn(
+        "text-sm leading-[var(--leading-normal)] text-muted-foreground md:text-base",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </p>
+  );
+}
+
+export function Caption({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p
+      className={cn(
+        "text-[var(--text-xs)] leading-[var(--leading-snug)] tracking-[var(--tracking-wide)] text-muted-foreground",
+        className
+      )}
       {...props}
     >
       {children}

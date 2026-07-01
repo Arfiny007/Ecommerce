@@ -3,9 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Camera } from "lucide-react";
-import { SITE_NAME, SOCIAL_LINKS } from "@/constants/site";
-import { FOOTER_NAV } from "@/constants/navigation";
+import { ArrowRight } from "lucide-react";
+import {
+  tagline,
+  newsletter,
+  footerAbout,
+  brandName,
+} from "@/constants/branding";
+import { FOOTER_NAV, FOOTER_SECTION_LABELS } from "@/constants/navigation";
+import { Logo } from "@/components/common/logo";
+import { SOCIAL_ICONS } from "@/components/common/social-icons";
 import { Container } from "@/components/common/container";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -36,13 +43,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="overflow-hidden border-b border-border py-6">
+    <footer className="border-t border-border-subtle bg-background">
+      <div className="overflow-hidden border-b border-border-subtle py-6">
         <Marquee speed={40}>
           {GALLERY_IMAGES.map((src, i) => (
             <div
               key={i}
-              className="h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-muted"
+              className="h-32 w-32 shrink-0 overflow-hidden rounded-[var(--radius-2xl)] bg-muted"
               style={{
                 backgroundImage: `url(${src})`,
                 backgroundSize: "cover",
@@ -56,31 +63,37 @@ export function Footer() {
       <Container className="py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link
-              href="/"
-              className="font-display text-3xl font-light tracking-[0.2em]"
-            >
-              {SITE_NAME}
-            </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Curated luxury for those who appreciate the art of considered living.
+            <Logo size="lg" animated />
+            <p className="mt-4 text-sm font-medium text-foreground">{tagline}</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              {footerAbout}
             </p>
-            <a
-              href={SOCIAL_LINKS.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Camera className="h-4 w-4" />
-              Follow us
-            </a>
+            <div className="mt-6 flex items-center gap-4">
+              {SOCIAL_ICONS.map(({ key, label, Icon, href }) => (
+                <a
+                  key={key}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${brandName} on ${label}`}
+                  className="text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
-            {Object.entries(FOOTER_NAV).map(([key, links]) => (
+            {(
+              Object.entries(FOOTER_NAV) as [
+                keyof typeof FOOTER_NAV,
+                (typeof FOOTER_NAV)[keyof typeof FOOTER_NAV],
+              ][]
+            ).map(([key, links]) => (
               <div key={key}>
                 <h4 className="text-xs font-medium uppercase tracking-[0.15em]">
-                  {key}
+                  {FOOTER_SECTION_LABELS[key]}
                 </h4>
                 <ul className="mt-4 space-y-3">
                   {links.map((link) => (
@@ -100,21 +113,21 @@ export function Footer() {
 
           <div className="lg:col-span-3">
             <h4 className="text-xs font-medium uppercase tracking-[0.15em]">
-              Newsletter
+              {newsletter.title}
             </h4>
             <p className="mt-4 text-sm text-muted-foreground">
-              Be the first to discover new collections and exclusive offers.
+              {newsletter.description}
             </p>
             <form onSubmit={handleSubscribe} className="mt-4 flex gap-2">
               <Input
                 type="email"
-                placeholder="Your email"
+                placeholder={newsletter.placeholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="flex-1"
               />
-              <Button type="submit" variant="luxury" size="icon">
+              <Button type="submit" variant="cta" size="icon" aria-label="Subscribe">
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </form>
@@ -124,7 +137,7 @@ export function Footer() {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-2 text-xs text-muted-foreground"
               >
-                Thank you for subscribing.
+                {newsletter.footerSuccessMessage}
               </motion.p>
             )}
           </div>
@@ -133,7 +146,9 @@ export function Footer() {
         <Separator className="my-12" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {brandName}. All rights reserved.
+          </p>
           <div className="flex gap-6">
             <Link href="#" className="transition-colors hover:text-foreground">
               Privacy

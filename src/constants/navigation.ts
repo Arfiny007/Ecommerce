@@ -1,3 +1,11 @@
+import { supportEmail } from "@/constants/branding";
+
+export const FOOTER_SECTION_LABELS = {
+  shop: "Shop",
+  company: "Company",
+  customerCare: "Customer Care",
+} as const;
+
 export interface NavItem {
   label: string;
   href: string;
@@ -14,7 +22,7 @@ export const MAIN_NAV: NavItem[] = [
       {
         label: "New Arrivals",
         href: "/shop?sort=newest",
-        description: "Latest curated pieces",
+        description: "Latest editorial drops",
         featured: true,
       },
       {
@@ -89,10 +97,11 @@ export const FOOTER_NAV = {
     { label: "Careers", href: "#" },
     { label: "Press", href: "#" },
   ],
-  support: [
-    { label: "Contact", href: "#" },
+  customerCare: [
+    { label: "Contact", href: `mailto:${supportEmail}` },
     { label: "Shipping", href: "#" },
-    { label: "Returns", href: "#" },
+    { label: "Returns & Exchanges", href: "#" },
     { label: "Size Guide", href: "#" },
+    { label: "FAQ", href: "#" },
   ],
 } as const;

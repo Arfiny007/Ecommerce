@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { AppProviders } from "@/components/providers/app-providers";
 import { SiteLayout } from "@/components/layout/site-layout";
-import { SITE_NAME, SITE_DESCRIPTION } from "@/constants/site";
+import { baseMetadata } from "@/lib/metadata";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -16,14 +16,7 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500", "600"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${SITE_NAME} — Luxury Fashion & Lifestyle`,
-    template: `%s | ${SITE_NAME}`,
-  },
-  description: SITE_DESCRIPTION,
-  keywords: ["luxury", "fashion", "lifestyle", "premium", "e-commerce"],
-};
+export const metadata: Metadata = baseMetadata;
 
 export default function RootLayout({
   children,

@@ -4,30 +4,31 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-luxury focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:opacity-90 active:scale-[0.98]",
+          "bg-primary text-primary-foreground shadow-subtle hover:opacity-90",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.98]",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         outline:
-          "border border-border bg-transparent hover:bg-accent hover:text-accent-foreground active:scale-[0.98]",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground active:scale-[0.98]",
+          "border border-border bg-transparent hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-foreground underline-offset-4 hover:underline",
+        text: "text-foreground hover:text-muted-foreground",
         luxury:
-          "bg-foreground text-background tracking-widest uppercase text-xs hover:opacity-90 active:scale-[0.98]",
+          "bg-foreground text-background uppercase tracking-[var(--tracking-widest)] shadow-soft hover:shadow-elevated hover:opacity-95",
         champagne:
-          "bg-champagne text-foreground tracking-widest uppercase text-xs hover:opacity-90 active:scale-[0.98]",
+          "bg-champagne text-foreground uppercase tracking-[var(--tracking-widest)] shadow-subtle hover:shadow-soft hover:opacity-95",
+        cta: "bg-foreground text-background uppercase tracking-[var(--tracking-widest)] shadow-luxury hover:-translate-y-0.5 hover:shadow-luxury",
       },
       size: {
-        default: "h-11 px-6 py-2",
-        sm: "h-9 px-4 text-xs",
-        lg: "h-13 px-8 text-base",
-        icon: "h-10 w-10",
-        xl: "h-14 px-10 text-sm tracking-widest uppercase",
+        default: "h-11 rounded-[var(--radius-full)] px-6 text-sm",
+        sm: "h-9 rounded-[var(--radius-full)] px-4 text-xs",
+        lg: "h-12 rounded-[var(--radius-full)] px-8 text-base",
+        icon: "h-10 w-10 rounded-[var(--radius-full)]",
+        xl: "h-14 rounded-[var(--radius-full)] px-10 text-xs",
       },
     },
     defaultVariants: {
