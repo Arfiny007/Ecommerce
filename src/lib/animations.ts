@@ -25,15 +25,6 @@ export const fadeInUp: Variants = {
   },
 };
 
-export const fadeInDown: Variants = {
-  hidden: { opacity: 0, y: -24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: luxuryTransition(duration.slower),
-  },
-};
-
 export const scaleIn: Variants = {
   hidden: { opacity: 0, scale: 0.96 },
   visible: {
@@ -151,14 +142,4 @@ export const buttonInteraction = {
   tap: { scale: 0.97, transition: luxuryTransition(duration.instant) },
 };
 
-export const hoverLift = {
-  rest: { y: 0, boxShadow: "var(--shadow-subtle)" },
-  hover: {
-    y: motionTokens.hover.lift,
-    boxShadow: "var(--shadow-elevated)",
-    transition: luxuryTransition(duration.fast),
-  },
-};
-
 export const luxuryEase = ease.luxury;
-export const defaultTransition = luxuryTransition();

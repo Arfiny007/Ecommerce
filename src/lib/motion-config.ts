@@ -56,16 +56,6 @@ export function getTransition(
   };
 }
 
-export function getSpring(
-  reducedMotion: boolean,
-  config: keyof typeof motionTokens.spring = "gentle"
-) {
-  if (reducedMotion) {
-    return { duration: 0 };
-  }
-  return motionTokens.spring[config];
-}
-
 export function getViewportMargin(reducedMotion: boolean) {
   return reducedMotion ? "0px" : "-80px";
 }

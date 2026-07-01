@@ -33,10 +33,12 @@ export function ProductGalleryLightbox({
   const [index, setIndex] = useState(initialIndex);
   const touchStartX = useRef(0);
   const reducedMotion = useReducedMotion();
+  const [syncKey, setSyncKey] = useState({ open, initialIndex });
 
-  useEffect(() => {
-    if (open) setIndex(initialIndex);
-  }, [open, initialIndex]);
+  if (open && (syncKey.open !== open || syncKey.initialIndex !== initialIndex)) {
+    setSyncKey({ open, initialIndex });
+    setIndex(initialIndex);
+  }
 
   const goTo = useCallback(
     (next: number) => {

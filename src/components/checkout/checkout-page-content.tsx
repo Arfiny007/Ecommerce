@@ -18,6 +18,7 @@ import { CheckoutSuccess } from "@/components/checkout/checkout-success";
 import { OrderSummary } from "@/components/checkout/order-summary";
 import { calculateCartTotals, generateOrderNumber } from "@/lib/cart-calculations";
 import { validateShippingForm } from "@/lib/form-utils";
+import { trackEcommerce } from "@/lib/analytics";
 import { checkoutCopy } from "@/constants/checkout";
 import { Container } from "@/components/common/container";
 import { Button } from "@/components/ui/button";
@@ -69,9 +70,31 @@ export function CheckoutPageContent() {
       setOrderNumber(num);
       setCompletedTotal(totals.total);
       setCompletedItems([...items]);
+      trackEcommerce({
+        action: "purchase",
+        value: totals.total,
+        items: items.map((item) => ({
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity,
+        })),
+      });
       clearCart();
       setStep("success");
       return;
+    }
+    if (step === "shipping") {
+      trackEcommerce({
+        action: "begin_checkout",
+        value: totals.total,
+        items: items.map((item) => ({
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity,
+        })),
+      });
     }
     if (idx < steps.length - 1) {
       setStep(steps[idx + 1] as CheckoutStepId);
@@ -164,12 +187,14 @@ export function CheckoutPageContent() {
         </div>
 
         <div className="lg:col-span-5">
-          <OrderSummary
-            subtotal={subtotal}
-            items={items}
-            showItems
-            collapsible
-          />
+          <div className="lg:hidden">
+            <OrderSummary
+              subtotal={subtotal}
+              items={items}
+              showItems
+              collapsible
+            />
+          </div>
           <div className="hidden lg:block">
             <OrderSummary subtotal={subtotal} items={items} showItems />
           </div>

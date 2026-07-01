@@ -42,17 +42,9 @@ function initGA4(): void {
   gaInitialized = true;
 }
 
-function initVercel(): void {
-  if (typeof window === "undefined" || !VERCEL_ANALYTICS_ENABLED) return;
-  // Placeholder: import @vercel/analytics when package is added
-  // import { inject } from '@vercel/analytics';
-  // inject();
-}
-
 export function initAnalytics(): void {
   if (!isAnalyticsEnabled()) return;
   initGA4();
-  initVercel();
 }
 
 export function trackPageView(url: string, title?: string): void {
@@ -63,10 +55,6 @@ export function trackPageView(url: string, title?: string): void {
       page_path: url,
       page_title: title ?? document.title,
     });
-  }
-
-  if (VERCEL_ANALYTICS_ENABLED) {
-    // Placeholder for @vercel/analytics track()
   }
 }
 

@@ -17,7 +17,8 @@ const FloatingLabelInput = React.forwardRef<
   HTMLInputElement,
   FloatingLabelInputProps
 >(({ className, label, error, success, id, value, onFocus, onBlur, ...props }, ref) => {
-  const inputId = id ?? React.useId();
+  const generatedId = React.useId();
+  const inputId = id ?? generatedId;
   const [focused, setFocused] = React.useState(false);
   const reducedMotion = useReducedMotion();
   const hasValue = Boolean(value && String(value).length > 0);

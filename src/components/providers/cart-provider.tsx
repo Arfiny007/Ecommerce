@@ -12,6 +12,7 @@ import type { CartContextValue, CartItem } from "@/types/cart";
 import type { Product, ProductColor, ProductSize } from "@/types/product";
 import { useLocalStorage } from "@/hooks/use-media-query";
 import { storageKeys } from "@/constants/branding";
+import { trackEcommerce } from "@/lib/analytics";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
@@ -63,6 +64,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
           { id, product, quantity, selectedColor: color, selectedSize: size },
         ];
       });
+      trackEcommerce({
+        action: "add_to_cart",
+        value: product.price * quantity,
+        items: [
+          {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity,
+          },
+        ],
+      });
       setIsOpen(true);
     },
     [setItems]
@@ -70,7 +83,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const removeItem = useCallback(
     (id: string) => {
-      setItems((prev) => prev.filter((item) => item.id !== id));
+      setItems((prev) => {
+        const removed = prev.find((item) => item.id === id);
+        if (removed) {
+          trackEcommerce({
+            action: "remove_from_cart",
+            value: removed.product.price * removed.quantity,
+            items: [
+              {
+                id: removed.product.id,
+                name: removed.product.name,
+                price: removed.product.price,
+                quantity: removed.quantity,
+              },
+            ],
+          });
+        }
+        return prev.filter((item) => item.id !== id);
+      });
     },
     [setItems]
   );

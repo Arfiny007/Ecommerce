@@ -1,12 +1,16 @@
 {
-  "name": "luxury-commerce",
-  "version": "0.1.0",
+  "name": "finy-fashions",
+  "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",

@@ -6,8 +6,11 @@ import { Section } from "@/components/common/section";
 import { Container } from "@/components/common/container";
 import { Caption } from "@/components/common/typography";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getJournalArticle, getJournalSlugs } from "@/constants/content/journal";
 import { createPageMetadata } from "@/lib/metadata";
+import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
+import { SITE_URL } from "@/constants/site";
 
 interface JournalArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -36,6 +39,16 @@ export default async function JournalArticlePage({ params }: JournalArticlePageP
 
   return (
     <>
+      <JsonLd
+        data={[
+          getArticleSchema(article),
+          getBreadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Journal", url: `${SITE_URL}/journal` },
+            { name: article.title, url: `${SITE_URL}/journal/${slug}` },
+          ]),
+        ]}
+      />
       <ContentPageHero eyebrow={article.category} title={article.title} size="narrow">
         <Caption className="mt-4 text-foreground/70">
           {article.author} · {article.date} · {article.readTime}

@@ -128,11 +128,10 @@ Reference for every route, component, hook, and shared primitive. Use this to na
 | `testimonials-carousel.tsx` | CC | Auto-advancing testimonial carousel |
 | `newsletter-section.tsx` | CC | Premium signup with trust indicators |
 | `text-reveal.tsx` | CC | `TextReveal`, `LineReveal` animation helpers |
-| `parallax-layer.tsx` | CC | `ParallaxLayer`, `ScrollParallax` scroll-driven Y transform |
 
 ### Home-only helpers (not exported to other features)
 
-- `text-reveal.tsx`, `parallax-layer.tsx` — prefer reusing for new editorial sections
+- `text-reveal.tsx` — prefer reusing for new editorial sections
 - `LookbookSection` in `horizontal-lookbook.tsx` — alias for `HorizontalLookbook`
 
 ---
@@ -198,7 +197,6 @@ constants/PRODUCTS ─────────────► lib/shop-filters.f
 | `section.tsx` | SC | Page section with optional header | `eyebrow`, `title`, `description`, `action`, `spacing`, `background`, `containerized` |
 | `section-header.tsx` | SC | Eyebrow + title + description + CTA row | `align`: left \| center; exports `SectionLinkAction` |
 | `typography.tsx` | SC | `Display`, `Heading`, `Subheading`, `Eyebrow`, `Lead`, `Body`, `Caption` | `as` for heading level |
-| `grid.tsx` | SC | `Grid`, `GridItem` | 12-column helpers |
 | `surface.tsx` | SC | Surface variants | `variant`: primary \| elevated \| muted \| bordered \| glass |
 | `premium-image.tsx` | CC | Image with shimmer, zoom-on-hover, optional overlay | `aspectRatio`, `rounded`, `zoomOnHover` |
 | `motion-wrapper.tsx` | CC | Scroll-triggered motion | `MotionWrapper`, `MotionStagger`, `MotionItem`; variants: fade, fadeUp, scale, blur, image, text, slide* |
@@ -240,7 +238,7 @@ All use `cn()` from `@/lib/utils` and design tokens. Radix primitives where note
 
 | Hook | Type | File | Purpose |
 |------|------|------|---------|
-| `useCart` | CC | `use-cart.ts` | Re-export from `cart-provider.tsx` |
+| `useCart` | CC | `cart-provider.tsx` | Cart state, drawer, `addItem`, `removeItem`, etc. |
 | `useWishlist` | CC | `use-wishlist.ts` | `wishlist`, `count`, `isWishlisted`, `toggleWishlist` |
 | `useCompare` | CC | `use-compare.ts` | `compareList`, `count`, `isCompared`, `toggleCompare` (max 4) |
 | `useShopFilters` | CC | `use-shop-filters.ts` | Shop filter state + memoized `filteredProducts`, chip helpers |

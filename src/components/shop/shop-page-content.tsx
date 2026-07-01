@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo, useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
 import { shopDescription } from "@/constants/branding";
 import { getCategoryCopy, getCollectionCopy } from "@/constants/content/catalog";
@@ -18,11 +18,15 @@ import { ShopEditorialBands } from "@/components/shop/shop-editorial-bands";
 import { useShopFilters } from "@/hooks/use-shop-filters";
 import type { SortOption, ViewMode } from "@/types/product";
 
+function subscribeNoop() {
+  return () => {};
+}
+
 export function ShopPageContent() {
   const searchParams = useSearchParams();
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const isHydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
 
   const {
     filters,
@@ -44,10 +48,6 @@ export function ShopPageContent() {
     sort: (searchParams.get("sort") as SortOption) || "newest",
     priceRange: [0, SHOP_MAX_PRICE],
   });
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
 
   const categoryParam = searchParams.get("category") || "";
   const collectionParam = searchParams.get("collection") || "";

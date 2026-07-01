@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import {
@@ -31,12 +31,13 @@ export function ShopQuickView({ product, open, onOpenChange }: ShopQuickViewProp
   const [selectedSize, setSelectedSize] = useState(
     product?.sizes.find((s) => s.available) ?? product?.sizes[0]
   );
+  const [prevProductId, setPrevProductId] = useState(product?.id);
 
-  useEffect(() => {
-    if (!product) return;
+  if (product && prevProductId !== product.id) {
+    setPrevProductId(product.id);
     setSelectedColor(product.colors[0]);
     setSelectedSize(product.sizes.find((s) => s.available) ?? product.sizes[0]);
-  }, [product]);
+  }
 
   if (!product) return null;
 

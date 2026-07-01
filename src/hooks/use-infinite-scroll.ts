@@ -14,11 +14,13 @@ export function useInfiniteScroll({
   rootMargin = "200px",
 }: UseInfiniteScrollOptions) {
   const [visibleCount, setVisibleCount] = useState(pageSize);
+  const [prevTotalItems, setPrevTotalItems] = useState(totalItems);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  if (prevTotalItems !== totalItems) {
+    setPrevTotalItems(totalItems);
     setVisibleCount(pageSize);
-  }, [totalItems, pageSize]);
+  }
 
   const loadMore = useCallback(() => {
     setVisibleCount((prev) => Math.min(prev + pageSize, totalItems));

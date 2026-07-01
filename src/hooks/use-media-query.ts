@@ -1,49 +1,27 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
-export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia(query);
-    setMatches(media.matches);
-
-    const listener = (event: MediaQueryListEvent) => {
-      setMatches(event.matches);
-    };
-
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, [query]);
-
-  return matches;
-}
-
-export function useIsMobile(): boolean {
-  return useMediaQuery("(max-width: 767px)");
-}
-
-export function useIsTablet(): boolean {
-  return useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+function readLocalStorage<T>(key: string, initialValue: T): T {
+  if (typeof window === "undefined") return initialValue;
+  try {
+    const item = window.localStorage.getItem(key);
+    if (item) {
+      return JSON.parse(item) as T;
+    }
+  } catch {
+    // ignore parse errors
+  }
+  return initialValue;
 }
 
 export function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void] {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
-
-  useEffect(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      if (item) {
-        setStoredValue(JSON.parse(item) as T);
-      }
-    } catch {
-      // ignore parse errors
-    }
-  }, [key]);
+  const [storedValue, setStoredValue] = useState<T>(() =>
+    readLocalStorage(key, initialValue)
+  );
 
   const setValue = useCallback(
     (value: T | ((prev: T) => T)) => {

@@ -8,7 +8,6 @@ import {
 } from "@/constants/branding";
 import { SITE_URL, CURRENCY } from "@/constants/site";
 import type { Product } from "@/types/product";
-import { formatPrice } from "@/lib/utils";
 
 export function getOrganizationSchema() {
   return {
@@ -147,5 +146,36 @@ export function getItemListSchema(
   };
 }
 
-/** For display in UI — not schema */
-export { formatPrice };
+export function getArticleSchema(article: {
+  title: string;
+  excerpt: string;
+  slug: string;
+  author: string;
+  date: string;
+  image: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    image: `https://images.unsplash.com/${article.image}?w=1200&q=85&auto=format&fit=crop`,
+    author: {
+      "@type": "Person",
+      name: article.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: brandName,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/icon.svg`,
+      },
+    },
+    datePublished: article.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/journal/${article.slug}`,
+    },
+  };
+}

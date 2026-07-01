@@ -49,16 +49,19 @@ src/
 ├── components/
 │   ├── ui/                 # Design-system primitives (Button, Input, …)
 │   ├── common/             # Layout, typography, motion, media helpers
-│   ├── layout/           # Site shell (header region = Navbar in navigation/)
+│   ├── layout/             # Site shell (footer, site-layout)
 │   ├── navigation/         # Navbar, mega menu, search, mobile menu
 │   ├── home/               # Landing page sections
 │   ├── shop/               # Catalog page content
 │   ├── product/            # PDP content
-│   ├── cart/               # Cart drawer
+│   ├── cart/               # Cart drawer and page
+│   ├── checkout/           # Multi-step checkout
+│   ├── editorial/          # Reusable editorial blocks
+│   ├── content/            # FAQ, contact, lookbook pages
 │   └── providers/          # React context providers
 ├── constants/              # Branding, nav, products, home copy
-├── hooks/                  # Client hooks (cart, wishlist, shop filters, compare, scroll)
-├── lib/                    # utils, animations, metadata, motion-config, shop-filters
+├── hooks/                  # Client hooks (wishlist, shop filters, compare, scroll)
+├── lib/                    # utils, animations, metadata, motion-config, shop-filters, analytics
 ├── styles/
 │   ├── globals.css         # Tailwind + utilities + keyframes
 │   └── tokens.css          # CSS custom properties (design tokens)
@@ -90,7 +93,7 @@ src/
 
 - All `app/**/page.tsx` files (except they import client children)
 - `app/layout.tsx`
-- `components/common/container.tsx`, `section.tsx`, `section-header.tsx`, `typography.tsx`, `grid.tsx`, `surface.tsx`
+- `components/common/container.tsx`, `section.tsx`, `section-header.tsx`, `typography.tsx`, `surface.tsx`
 - `components/layout/footer.tsx` is `"use client"` (form state) — see COMPONENT_MAP
 
 **Rule:** Add `"use client"` only when the file needs hooks, browser APIs, Framer Motion, or event handlers.
@@ -123,7 +126,7 @@ src/
 | View mode (grid/list) | Local state in `ShopPageContent` | Session only |
 | Infinite scroll offset | `useInfiniteScroll` hook | Resets when filter results change |
 
-**Cart API:** `useCart()` from `@/hooks/use-cart.ts` (re-exports `CartProvider` + `useCart` from `cart-provider.tsx`).
+**Cart API:** `useCart()` from `@/components/providers/cart-provider`.
 
 **Shop filter API:** `useShopFilters()` from `@/hooks/use-shop-filters.ts` — wraps `lib/shop-filters.ts` pure functions with React state and memoized `filteredProducts`.
 
@@ -139,7 +142,7 @@ src/
 | Products | `constants/products.ts` | `PRODUCTS`, `CATEGORIES`, `BRANDS`, `SHOP_MAX_PRICE`, filter helpers |
 | Home editorial | `constants/home-content.ts` | Hero video, lookbook slides, editorial chapters, timeline (not branding) |
 
-**Types:** `types/product.ts`, `types/cart.ts`, barrel `types/index.ts`.
+**Types:** `types/product.ts`, `types/cart.ts`.
 
 There is no database. Replacing static data later should keep the same types and helper function signatures where possible.
 
@@ -266,9 +269,11 @@ Server page resolves product via `getProductBySlug`. `ProductPageContent` handle
 ## Build & Deploy
 
 ```bash
-npm run dev      # Local development
-npm run build    # Production build (SSG for products)
-npm run start    # Production server
+npm run dev        # Local development
+npm run build      # Production build (SSG for products)
+npm run start      # Production server
+npm run lint       # ESLint
+npm run typecheck  # TypeScript check
 ```
 
 Netlify runs `npm run build` and publishes via the Next.js plugin. Add `.netlify` to `.gitignore` (already present).
@@ -278,6 +283,9 @@ Netlify runs `npm run build` and publishes via the Next.js plugin. Add `.netlify
 ## Related Documentation
 
 - **[COMPONENT_MAP.md](./COMPONENT_MAP.md)** — exhaustive component and primitive reference
+- **[FEATURES.md](./FEATURES.md)** — feature inventory
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** — deploy guide
+- **[ENVIRONMENT.md](./ENVIRONMENT.md)** — environment variables
 
 ---
 

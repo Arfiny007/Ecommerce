@@ -1,19 +1,21 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import { getTransition } from "@/lib/motion-config";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
+function subscribeNoop() {
+  return () => {};
+}
+
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const reducedMotion = useReducedMotion();
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
     return (

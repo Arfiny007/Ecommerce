@@ -13,10 +13,7 @@ export function LoadingScreen() {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) {
-      setIsLoading(false);
-      return;
-    }
+    if (reducedMotion) return;
     const timer = setTimeout(() => setIsLoading(false), 2200);
     return () => clearTimeout(timer);
   }, [reducedMotion]);

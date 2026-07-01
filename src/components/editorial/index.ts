@@ -8,5 +8,4 @@ export { MagazineGrid } from "./magazine-grid";
 export { ImageCollage } from "./image-collage";
 export { JournalPreview } from "./journal-preview";
 export { MaterialShowcase } from "./material-showcase";
-export { InstagramGallery } from "./instagram-gallery";
 export { EditorialDivider } from "./editorial-divider";
