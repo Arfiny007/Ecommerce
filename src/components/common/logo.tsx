@@ -86,7 +86,7 @@ export function Logo({
 
   if (asLink) {
     return (
-      <Link href="/" aria-label={`${shortName} ${logoSubtitle} — Home`} className="inline-block">
+      <Link href="/" prefetch aria-label={`${shortName} ${logoSubtitle} — Home`} className="inline-block">
         {content}
       </Link>
     );

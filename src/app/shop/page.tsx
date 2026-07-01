@@ -3,10 +3,17 @@ import { ShopPageContent } from "@/components/shop/shop-page-content";
 import { ShopLoadingSkeleton } from "@/components/shop/shop-loading-skeleton";
 import { Container } from "@/components/common/container";
 import { Skeleton } from "@/components/ui/skeleton";
+import { JsonLd } from "@/components/seo/json-ld";
 import { createPageMetadata } from "@/lib/metadata";
 import { shopDescription } from "@/constants/branding";
+import { PRODUCTS } from "@/constants/products";
+import { getItemListSchema } from "@/lib/structured-data";
 
-export const metadata = createPageMetadata("Shop", shopDescription);
+export const metadata = createPageMetadata({
+  title: "Shop",
+  description: shopDescription,
+  path: "/shop",
+});
 
 function ShopLoading() {
   return (
@@ -38,8 +45,11 @@ function ShopLoading() {
 
 export default function ShopPage() {
   return (
-    <Suspense fallback={<ShopLoading />}>
-      <ShopPageContent />
-    </Suspense>
+    <>
+      <JsonLd data={getItemListSchema(PRODUCTS, "FINY FASHIONS Collection")} />
+      <Suspense fallback={<ShopLoading />}>
+        <ShopPageContent />
+      </Suspense>
+    </>
   );
 }

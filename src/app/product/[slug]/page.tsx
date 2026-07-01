@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductBySlug, PRODUCTS } from "@/constants/products";
 import { ProductPageContent } from "@/components/product/product-page-content";
+import { JsonLd } from "@/components/seo/json-ld";
+import { createProductMetadata } from "@/lib/metadata";
+import {
+  getProductSchema,
+  getProductBreadcrumbSchema,
+} from "@/lib/structured-data";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -13,9 +19,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: ProductPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -23,10 +27,7 @@ export async function generateMetadata({
     return { title: "Product Not Found" };
   }
 
-  return {
-    title: product.name,
-    description: product.description,
-  };
+  return createProductMetadata(product);
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -37,5 +38,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  return <ProductPageContent product={product} />;
+  return (
+    <>
+      <JsonLd
+        data={[getProductSchema(product), getProductBreadcrumbSchema(product)]}
+      />
+      <ProductPageContent product={product} />
+    </>
+  );
 }

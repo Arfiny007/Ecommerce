@@ -91,7 +91,7 @@ export function Navbar() {
               <Search className="h-4 w-4" />
             </Button>
             <ThemeToggle />
-            <Link href="/shop">
+            <Link href="/profile" prefetch>
               <Button variant="ghost" size="icon" aria-label="Wishlist" className="relative">
                 <Heart className="h-4 w-4" />
                 <AnimatePresence>

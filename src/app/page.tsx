@@ -7,6 +7,13 @@ import { BrandStory } from "@/components/home/brand-story-section";
 import { BestSellers } from "@/components/home/best-sellers-section";
 import { Testimonials } from "@/components/home/testimonials-carousel";
 import { NewsletterSection } from "@/components/home/newsletter-section";
+import { baseMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/constants/site";
+
+export const metadata = {
+  ...baseMetadata,
+  alternates: { canonical: SITE_URL },
+};
 
 export default function HomePage() {
   return (
