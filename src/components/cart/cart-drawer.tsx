@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Minus, Plus, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/providers/cart-provider";
 import { formatPrice } from "@/lib/utils";
 import { emptyStates } from "@/constants/branding";
@@ -17,6 +18,10 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Magnetic } from "@/components/motion/magnetic";
+import { drawerItem } from "@/lib/animations";
+import { getTransition } from "@/lib/motion-config";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function CartItemRow({
   id,
@@ -24,23 +29,34 @@ export function CartItemRow({
   quantity,
   selectedColor,
   selectedSize,
+  index = 0,
 }: {
   id: string;
   product: import("@/types/product").Product;
   quantity: number;
   selectedColor: import("@/types/product").ProductColor;
   selectedSize: import("@/types/product").ProductSize;
+  index?: number;
 }) {
   const { updateQuantity, removeItem } = useCart();
+  const reducedMotion = useReducedMotion();
 
   return (
-    <div className="flex gap-4">
-      <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl">
+    <motion.div
+      layout
+      custom={index}
+      variants={reducedMotion ? undefined : drawerItem}
+      initial={reducedMotion ? false : "hidden"}
+      animate="visible"
+      exit="exit"
+      className="flex gap-4"
+    >
+      <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl" data-cursor-image>
         <Image
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-cover"
+          className="object-cover transition-luxury hover:scale-105"
           sizes="80px"
         />
       </div>
@@ -50,8 +66,9 @@ export function CartItemRow({
             <h4 className="text-sm font-medium leading-tight">{product.name}</h4>
             <button
               onClick={() => removeItem(id)}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground transition-luxury hover:scale-110 hover:text-foreground"
               aria-label="Remove item"
+              data-cursor="button"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -71,7 +88,15 @@ export function CartItemRow({
             >
               <Minus className="h-3 w-3" />
             </Button>
-            <span className="w-6 text-center text-sm">{quantity}</span>
+            <motion.span
+              key={quantity}
+              initial={{ opacity: 0.5, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={getTransition(reducedMotion, 0.2)}
+              className="w-6 text-center text-sm tabular-nums"
+            >
+              {quantity}
+            </motion.span>
             <Button
               variant="outline"
               size="icon"
@@ -82,22 +107,28 @@ export function CartItemRow({
               <Plus className="h-3 w-3" />
             </Button>
           </div>
-          <span className="text-sm font-medium">
+          <motion.span
+            key={product.price * quantity}
+            initial={{ opacity: 0.6 }}
+            animate={{ opacity: 1 }}
+            className="text-sm font-medium tabular-nums"
+          >
             {formatPrice(product.price * quantity)}
-          </span>
+          </motion.span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, subtotal, itemCount } = useCart();
   const shippingRemaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+  const reducedMotion = useReducedMotion();
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent className="flex w-full flex-col surface-elevated sm:max-w-md">
+      <SheetContent className="flex w-full flex-col surface-elevated sm:max-w-md" data-cursor="hidden">
         <SheetHeader>
           <SheetTitle className="font-display text-2xl font-light">
             {emptyStates.cartBagTitle}
@@ -110,25 +141,41 @@ export function CartDrawer() {
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              {emptyStates.cart}
-            </p>
-            <Button variant="luxury" onClick={closeCart} asChild>
-              <a href="/shop">{emptyStates.cartCta}</a>
-            </Button>
-          </div>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={getTransition(reducedMotion)}
+            className="flex flex-1 flex-col items-center justify-center gap-6 text-center"
+          >
+            <motion.div
+              animate={reducedMotion ? undefined : { y: [0, -6, 0] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            >
+              <ShoppingBag className="h-12 w-12 text-muted-foreground/40" />
+            </motion.div>
+            <p className="text-sm text-muted-foreground">{emptyStates.cart}</p>
+            <Magnetic>
+              <Button variant="luxury" onClick={closeCart} asChild>
+                <a href="/shop">{emptyStates.cartCta}</a>
+              </Button>
+            </Magnetic>
+          </motion.div>
         ) : (
           <>
             <ScrollArea className="flex-1 -mx-6 px-6">
-              <div className="space-y-6 py-4">
-                {items.map((item) => (
-                  <CartItemRow key={item.id} {...item} />
-                ))}
-              </div>
+              <motion.div layout className="space-y-6 py-4">
+                <AnimatePresence mode="popLayout">
+                  {items.map((item, index) => (
+                    <CartItemRow key={item.id} {...item} index={index} />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             </ScrollArea>
 
-            <div className="mt-auto space-y-4 border-t border-border pt-6">
+            <motion.div
+              layout
+              className="mt-auto space-y-4 border-t border-border pt-6"
+            >
               {shippingRemaining > 0 && (
                 <p className="text-center text-xs text-muted-foreground">
                   {formatPrice(shippingRemaining)} away from complimentary shipping
@@ -143,15 +190,25 @@ export function CartDrawer() {
               <Separator />
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-medium">{formatPrice(subtotal)}</span>
+                <motion.span
+                  key={subtotal}
+                  initial={{ opacity: 0.5, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={getTransition(reducedMotion, 0.25)}
+                  className="font-medium tabular-nums"
+                >
+                  {formatPrice(subtotal)}
+                </motion.span>
               </div>
               <p className="text-xs text-muted-foreground">
                 Shipping and taxes calculated at checkout
               </p>
-              <Button variant="cta" size="xl" className="w-full">
-                Checkout
-              </Button>
-            </div>
+              <Magnetic>
+                <Button variant="cta" size="xl" className="w-full">
+                  Checkout
+                </Button>
+              </Magnetic>
+            </motion.div>
           </>
         )}
       </SheetContent>

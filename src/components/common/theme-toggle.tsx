@@ -2,12 +2,16 @@
 
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { getTransition } from "@/lib/motion-config";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => setMounted(true), []);
 
@@ -19,18 +23,27 @@ export function ThemeToggle() {
     );
   }
 
+  const isDark = theme === "dark";
+
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
-        <Sun className="h-4 w-4 transition-transform hover:rotate-45" />
-      ) : (
-        <Moon className="h-4 w-4 transition-transform hover:-rotate-12" />
-      )}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={isDark ? "sun" : "moon"}
+          initial={reducedMotion ? false : { opacity: 0, rotate: -90, scale: 0.8 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={reducedMotion ? undefined : { opacity: 0, rotate: 90, scale: 0.8 }}
+          transition={getTransition(reducedMotion, 0.25)}
+          className="inline-flex"
+        >
+          {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </motion.span>
+      </AnimatePresence>
     </Button>
   );
 }

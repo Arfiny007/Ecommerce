@@ -13,7 +13,7 @@ import {
   staggerContainer,
   staggerItem,
 } from "@/lib/animations";
-import { getTransition, getViewportMargin } from "@/lib/motion-config";
+import { getTransition, getViewportMargin, getStaggerTransition } from "@/lib/motion-config";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -86,7 +86,13 @@ export function MotionStagger({
       initial={reducedMotion ? false : "hidden"}
       whileInView={reducedMotion ? undefined : "visible"}
       viewport={{ once, margin: getViewportMargin(reducedMotion) }}
-      variants={staggerContainer}
+      variants={{
+        ...staggerContainer,
+        visible: {
+          ...staggerContainer.visible,
+          transition: getStaggerTransition(reducedMotion),
+        },
+      }}
       className={cn(className)}
       {...props}
     >

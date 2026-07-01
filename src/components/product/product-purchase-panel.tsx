@@ -20,6 +20,7 @@ import {
   ProductQuantitySelector,
 } from "@/components/product/product-variant-selectors";
 import { ProductSocialProof } from "@/components/product/product-social-proof";
+import { Magnetic } from "@/components/motion/magnetic";
 import { cn } from "@/lib/utils";
 import { getTransition } from "@/lib/motion-config";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
@@ -205,33 +206,37 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
       </div>
 
       <div className="space-y-3">
-        <motion.div whileTap={reducedMotion ? undefined : { scale: 0.98 }}>
+        <Magnetic>
+          <motion.div whileTap={reducedMotion ? undefined : { scale: 0.98 }} className="w-full">
+            <Button
+              variant="cta"
+              size="xl"
+              className="w-full"
+              onClick={handleAddToCart}
+              disabled={!canPurchase}
+            >
+              <motion.span
+                animate={addedPulse ? { scale: [1, 1.05, 1] } : { scale: 1 }}
+                transition={getTransition(reducedMotion, 0.3)}
+              >
+                {canPurchase
+                  ? `Add to Bag — ${formatPrice(product.price * quantity)}`
+                  : "Sold Out"}
+              </motion.span>
+            </Button>
+          </motion.div>
+        </Magnetic>
+        <Magnetic>
           <Button
-            variant="cta"
-            size="xl"
+            variant="luxury"
+            size="lg"
             className="w-full"
-            onClick={handleAddToCart}
+            onClick={handleBuyNow}
             disabled={!canPurchase}
           >
-            <motion.span
-              animate={addedPulse ? { scale: [1, 1.05, 1] } : { scale: 1 }}
-              transition={getTransition(reducedMotion, 0.3)}
-            >
-              {canPurchase
-                ? `Add to Bag — ${formatPrice(product.price * quantity)}`
-                : "Sold Out"}
-            </motion.span>
+            Buy Now
           </Button>
-        </motion.div>
-        <Button
-          variant="luxury"
-          size="lg"
-          className="w-full"
-          onClick={handleBuyNow}
-          disabled={!canPurchase}
-        >
-          Buy Now
-        </Button>
+        </Magnetic>
       </div>
 
       <div className="grid grid-cols-3 gap-4 border-t border-border pt-6">

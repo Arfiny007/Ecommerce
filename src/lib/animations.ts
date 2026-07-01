@@ -1,7 +1,7 @@
 import type { Variants, Transition } from "framer-motion";
 import { motionTokens } from "@/lib/motion-config";
 
-const { duration, ease } = motionTokens;
+const { duration, ease, delay } = motionTokens;
 
 const luxuryTransition = (d: number = duration.normal): Transition => ({
   duration: d,
@@ -93,8 +93,8 @@ export const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.07,
-      delayChildren: 0.08,
+      staggerChildren: delay.stagger,
+      delayChildren: delay.staggerChild,
     },
   },
 };
@@ -108,10 +108,53 @@ export const staggerItem: Variants = {
   },
 };
 
+export const pageTransition: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.985,
+    filter: "blur(6px)",
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: luxuryTransition(duration.page),
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.008,
+    filter: "blur(4px)",
+    transition: luxuryTransition(duration.fast),
+  },
+};
+
+export const drawerItem: Variants = {
+  hidden: { opacity: 0, x: 24 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      ...luxuryTransition(duration.normal),
+      delay: i * delay.xs,
+    },
+  }),
+  exit: { opacity: 0, x: 16, transition: luxuryTransition(duration.fast) },
+};
+
+export const buttonInteraction = {
+  rest: { scale: 1, y: 0 },
+  hover: {
+    scale: 1.02,
+    y: motionTokens.hover.lift,
+    transition: luxuryTransition(motionTokens.hover.duration),
+  },
+  tap: { scale: 0.97, transition: luxuryTransition(duration.instant) },
+};
+
 export const hoverLift = {
   rest: { y: 0, boxShadow: "var(--shadow-subtle)" },
   hover: {
-    y: -4,
+    y: motionTokens.hover.lift,
     boxShadow: "var(--shadow-elevated)",
     transition: luxuryTransition(duration.fast),
   },

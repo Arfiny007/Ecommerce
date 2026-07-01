@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { luxuryEase } from "@/lib/animations";
+import { motionTokens } from "@/lib/motion-config";
 
 interface TextRevealProps {
   children: string;
@@ -34,8 +35,8 @@ export function TextReveal({
             initial={{ y: "110%", opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{
-              duration: 0.8,
-              delay: delay + i * 0.06,
+              duration: motionTokens.duration.slower,
+              delay: delay + i * motionTokens.delay.stagger,
               ease: luxuryEase,
             }}
           >
@@ -65,7 +66,7 @@ export function LineReveal({ children, className, delay = 0 }: LineRevealProps) 
       <motion.div
         initial={{ y: "100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay, ease: luxuryEase }}
+        transition={{ duration: motionTokens.duration.slower, delay, ease: luxuryEase }}
       >
         {children}
       </motion.div>

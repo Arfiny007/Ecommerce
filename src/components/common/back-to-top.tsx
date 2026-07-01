@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/motion/magnetic";
+import { getTransition } from "@/lib/motion-config";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 export function BackToTop() {
@@ -27,10 +29,11 @@ export function BackToTop() {
           initial={reducedMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={reducedMotion ? undefined : { opacity: 0, y: 16 }}
-          transition={{ duration: 0.3 }}
+          transition={getTransition(reducedMotion, 0.3)}
           className="fixed bottom-8 right-8 z-overlay"
         >
-          <Button
+          <Magnetic>
+            <Button
             variant="outline"
             size="icon"
             onClick={scrollToTop}
@@ -39,6 +42,7 @@ export function BackToTop() {
           >
             <ArrowUp className="h-4 w-4" />
           </Button>
+          </Magnetic>
         </motion.div>
       )}
     </AnimatePresence>

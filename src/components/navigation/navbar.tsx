@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Heart, ShoppingBag, Menu } from "lucide-react";
 import { Logo } from "@/components/common/logo";
+import { Magnetic } from "@/components/motion/magnetic";
 import { MAIN_NAV } from "@/constants/navigation";
 import { useCart } from "@/components/providers/cart-provider";
 import { useWishlist } from "@/hooks/use-wishlist";
@@ -63,19 +64,22 @@ export function Navbar() {
                     item.children ? setActiveMenu(item.label) : setActiveMenu(null)
                   }
                   className="group relative text-xs font-medium uppercase tracking-[0.15em] transition-colors hover:text-muted-foreground"
+                  data-cursor="link"
                 >
                   {item.children ? (
                     <span>{item.label}</span>
                   ) : (
                     <Link href={item.href}>{item.label}</Link>
                   )}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-foreground transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-foreground transition-all duration-300 ease-[var(--ease-luxury)] group-hover:w-full" />
                 </button>
               ))}
             </div>
           </div>
 
-          <Logo size="md" animated className="absolute left-1/2 -translate-x-1/2" />
+          <Magnetic className="absolute left-1/2 -translate-x-1/2" strength={0.18}>
+            <Logo size="md" animated />
+          </Magnetic>
 
           <div className="flex items-center gap-1">
             <Button

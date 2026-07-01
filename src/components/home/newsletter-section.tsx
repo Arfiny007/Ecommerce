@@ -9,6 +9,7 @@ import { Section } from "@/components/common/section";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Surface } from "@/components/common/surface";
+import { Magnetic } from "@/components/motion/magnetic";
 
 const TRUST_ICONS = [Sparkles, Mail, Shield];
 
@@ -79,9 +80,11 @@ export function NewsletterSection() {
               required
               className="flex-1 border-0 bg-surface-muted shadow-none focus-visible:ring-1"
             />
-            <Button type="submit" variant="cta" size="lg" className="shrink-0">
-              Subscribe
-            </Button>
+            <Magnetic>
+              <Button type="submit" variant="cta" size="lg" className="shrink-0">
+                Subscribe
+              </Button>
+            </Magnetic>
           </motion.form>
 
           {subscribed && (

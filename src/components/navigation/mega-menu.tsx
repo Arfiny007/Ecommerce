@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { getTransition } from "@/lib/motion-config";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import type { NavItem } from "@/constants/navigation";
 
 interface MegaMenuProps {
@@ -12,14 +14,16 @@ interface MegaMenuProps {
 }
 
 export function MegaMenu({ items, isOpen, onClose }: MegaMenuProps) {
+  const reducedMotion = useReducedMotion();
+
   if (!isOpen) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -6 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -6 }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      initial={reducedMotion ? false : { opacity: 0, y: -8, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
+      transition={getTransition(reducedMotion, 0.4)}
       className="absolute left-0 right-0 top-full border-b border-border-subtle surface-glass shadow-soft"
       onMouseLeave={onClose}
     >

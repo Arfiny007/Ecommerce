@@ -4,6 +4,9 @@ import { CartDrawer } from "@/components/cart/cart-drawer";
 import { ScrollIndicator } from "@/components/common/scroll-indicator";
 import { BackToTop } from "@/components/common/back-to-top";
 import { LoadingScreen } from "@/components/common/loading-screen";
+import { MotionShell } from "@/components/motion/motion-shell";
+import { BackgroundEffects } from "@/components/motion/background-effects";
+import { PageTransition } from "@/components/motion/page-transition";
 
 interface SiteLayoutProps {
   children: React.ReactNode;
@@ -11,18 +14,19 @@ interface SiteLayoutProps {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <div className="relative min-h-screen bg-background">
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 bg-radial-bloom bg-noise"
-      />
-      <LoadingScreen />
-      <ScrollIndicator />
-      <Navbar />
-      <main className="relative min-h-screen">{children}</main>
-      <Footer />
-      <CartDrawer />
-      <BackToTop />
-    </div>
+    <MotionShell>
+      <div className="relative min-h-screen bg-background">
+        <BackgroundEffects />
+        <LoadingScreen />
+        <ScrollIndicator />
+        <Navbar />
+        <main className="relative min-h-screen">
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer />
+        <CartDrawer />
+        <BackToTop />
+      </div>
+    </MotionShell>
   );
 }
