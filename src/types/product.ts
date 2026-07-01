@@ -60,3 +60,23 @@ export interface ActiveFilterChip {
   group: keyof ShopFilterState;
   value?: string;
 }
+
+export interface ProductDetailContent {
+  materials: string;
+  dimensions: string;
+  care: string;
+  shipping: string;
+  returns: string;
+  warranty: string;
+}
+
+export interface ProductReview {
+  id: string;
+  author: string;
+  rating: number;
+  title: string;
+  body: string;
+  date: string;
+  verified: boolean;
+  images?: string[];
+}

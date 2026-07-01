@@ -272,3 +272,34 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
     (p) => p.id !== product.id && p.category === product.category
   ).slice(0, limit);
 }
+
+export function getCompleteTheLook(product: Product, limit = 4): Product[] {
+  const sameCollection = PRODUCTS.filter(
+    (p) =>
+      p.id !== product.id &&
+      p.collection === product.collection &&
+      p.category !== product.category
+  );
+  if (sameCollection.length >= limit) return sameCollection.slice(0, limit);
+
+  const complementary = PRODUCTS.filter(
+    (p) =>
+      p.id !== product.id &&
+      p.category !== product.category &&
+      !sameCollection.some((s) => s.id === p.id)
+  );
+  return [...sameCollection, ...complementary].slice(0, limit);
+}
+
+export function getTrendingProducts(excludeId?: string, limit = 4): Product[] {
+  return [...PRODUCTS]
+    .filter((p) => p.id !== excludeId)
+    .sort((a, b) => b.reviewCount - a.reviewCount)
+    .slice(0, limit);
+}
+
+export function getProductsByIds(ids: string[]): Product[] {
+  return ids
+    .map((id) => PRODUCTS.find((p) => p.id === id))
+    .filter((p): p is Product => p !== undefined);
+}
