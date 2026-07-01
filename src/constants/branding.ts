@@ -41,6 +41,7 @@ export const emptyStates = {
 export const storageKeys = {
   cart: "finy-cart",
   wishlist: "finy-wishlist",
+  compare: "finy-compare",
 } as const;
 
 export const brandStory = {

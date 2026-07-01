@@ -216,6 +216,8 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+export const SHOP_MAX_PRICE = 2500;
+
 export const CATEGORIES = [
   { slug: "ready-to-wear", label: "Ready-to-Wear", count: 4 },
   { slug: "accessories", label: "Accessories", count: 1 },
@@ -223,6 +225,35 @@ export const CATEGORIES = [
   { slug: "fragrance", label: "Fragrance", count: 1 },
   { slug: "home", label: "Home", count: 1 },
 ] as const;
+
+export const BRANDS = [
+  { slug: "ss26", label: "SS26 Collection" },
+  { slug: "essentials", label: "FINY Essentials" },
+  { slug: "limited", label: "Limited Edition" },
+] as const;
+
+export function isProductInStock(product: Product): boolean {
+  return product.sizes.some((s) => s.available);
+}
+
+export function getShopFilterOptions() {
+  const sizeSet = new Set<string>();
+  const colorMap = new Map<string, string>();
+
+  for (const product of PRODUCTS) {
+    for (const size of product.sizes) {
+      if (size.available) sizeSet.add(size.label);
+    }
+    for (const color of product.colors) {
+      colorMap.set(color.name, color.hex);
+    }
+  }
+
+  return {
+    sizes: Array.from(sizeSet).sort(),
+    colors: Array.from(colorMap.entries()).map(([name, hex]) => ({ name, hex })),
+  };
+}
 
 export function getProductBySlug(slug: string): Product | undefined {
   return PRODUCTS.find((p) => p.slug === slug);

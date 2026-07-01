@@ -28,13 +28,35 @@ export interface Product {
   reviewCount: number;
 }
 
+export type SortOption = "newest" | "price-asc" | "price-desc" | "popular";
+
+export type AvailabilityFilter = "all" | "in-stock" | "sold-out";
+
+export interface ShopFilterState {
+  category: string;
+  search: string;
+  priceRange: [number, number];
+  sort: SortOption;
+  sizes: string[];
+  colors: string[];
+  availability: AvailabilityFilter;
+  brands: string[];
+}
+
 export interface ProductFilters {
   category?: string;
   collection?: string;
   minPrice?: number;
   maxPrice?: number;
-  sort?: "newest" | "price-asc" | "price-desc" | "popular";
+  sort?: SortOption;
   search?: string;
 }
 
 export type ViewMode = "grid" | "list";
+
+export interface ActiveFilterChip {
+  id: string;
+  label: string;
+  group: keyof ShopFilterState;
+  value?: string;
+}
