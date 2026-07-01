@@ -49,7 +49,7 @@ export function CartRecommendations({
     <div className={cn("space-y-6", className)}>
       {sections.map((section) => (
         <div key={section.title}>
-          <h3 className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+          <h3 className="label-caps mb-3 text-muted-foreground">
             {section.title}
           </h3>
           <div

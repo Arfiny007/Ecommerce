@@ -21,7 +21,7 @@ export function JournalGrid({ articles }: JournalGridProps) {
               src={`https://images.unsplash.com/${article.image}?w=600&q=85&auto=format&fit=crop`}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="image-hover-zoom-emphasis"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
           </div>

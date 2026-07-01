@@ -60,7 +60,7 @@ export function Footer() {
         </Marquee>
       </div>
 
-      <Container className="py-16 md:py-24">
+      <Container className="py-[var(--section-py-md)] md:py-[var(--section-py-lg)]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo size="lg" animated />
@@ -92,7 +92,7 @@ export function Footer() {
               ][]
             ).map(([key, links]) => (
               <div key={key}>
-                <h4 className="text-xs font-medium uppercase tracking-[0.15em]">
+                <h4 className="label-caps">
                   {FOOTER_SECTION_LABELS[key]}
                 </h4>
                 <ul className="mt-4 space-y-3">
@@ -112,7 +112,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-medium uppercase tracking-[0.15em]">
+            <h4 className="label-caps">
               {newsletter.title}
             </h4>
             <p className="mt-4 text-sm text-muted-foreground">

@@ -85,7 +85,7 @@ export function CouponInput({
         <button
           type="button"
           onClick={() => setExpanded(true)}
-          className="flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-muted-foreground transition-luxury hover:text-foreground"
+          className="label-caps-muted flex items-center gap-2 transition-luxury hover:text-foreground"
         >
           <Tag className="h-3.5 w-3.5" aria-hidden />
           Add promo code

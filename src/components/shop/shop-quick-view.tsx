@@ -99,7 +99,7 @@ export function ShopQuickView({ product, open, onOpenChange }: ShopQuickViewProp
 
             {product.colors.length > 1 && (
               <div className="mt-6">
-                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                <p className="label-caps-muted">
                   Color — {color.name}
                 </p>
                 <div className="mt-2 flex gap-2">
@@ -124,7 +124,7 @@ export function ShopQuickView({ product, open, onOpenChange }: ShopQuickViewProp
 
             {product.sizes.length > 1 && (
               <div className="mt-6">
-                <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                <p className="label-caps-muted">
                   Size
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">

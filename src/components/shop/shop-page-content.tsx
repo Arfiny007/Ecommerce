@@ -7,13 +7,14 @@ import { getCategoryCopy, getCollectionCopy } from "@/constants/content/catalog"
 import { SHOP_MAX_PRICE } from "@/constants/products";
 import { Section } from "@/components/common/section";
 import { Container } from "@/components/common/container";
-import { Heading, Eyebrow, Body } from "@/components/common/typography";
+import { ContentPageHero } from "@/components/content/content-page-hero";
 import { ShopFilterSidebar } from "@/components/shop/shop-filter-sidebar";
 import { ShopFilterDrawer } from "@/components/shop/shop-filter-drawer";
 import { ShopFilterChips } from "@/components/shop/shop-filter-chips";
 import { ShopCategoryPills } from "@/components/shop/shop-category-pills";
 import { ShopToolbar } from "@/components/shop/shop-toolbar";
 import { ShopProductGrid } from "@/components/shop/shop-product-grid";
+import { ShopEditorialBands } from "@/components/shop/shop-editorial-bands";
 import { useShopFilters } from "@/hooks/use-shop-filters";
 import type { SortOption, ViewMode } from "@/types/product";
 
@@ -81,20 +82,20 @@ export function ShopPageContent() {
 
   return (
     <>
-      <div className="border-b border-border-subtle bg-surface-muted pt-24 pb-10 md:pt-32 md:pb-14">
-        <Container>
-          <Eyebrow>{pageCopy.eyebrow}</Eyebrow>
-          <Heading className="mt-3">{pageCopy.title}</Heading>
-          <Body className="mt-4 prose-width">{pageCopy.body}</Body>
-          <ShopCategoryPills
-            activeCategory={filters.category}
-            onCategoryChange={setCategory}
-            className="mt-8"
-          />
-        </Container>
-      </div>
+      <ContentPageHero eyebrow={pageCopy.eyebrow} title={pageCopy.title} lead={pageCopy.body}>
+        <ShopCategoryPills
+          activeCategory={filters.category}
+          onCategoryChange={setCategory}
+          className="mt-8"
+        />
+      </ContentPageHero>
 
-      <Section noPadding className="py-8 md:py-12">
+      <ShopEditorialBands
+        showSeasonBanner={!categoryParam && !collectionParam}
+        showCategoryStories={!categoryParam}
+      />
+
+      <Section noPadding className="py-8 md:py-10">
         <Container>
           <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
             <ShopFilterSidebar {...filterPanelProps} />

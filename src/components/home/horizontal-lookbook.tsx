@@ -8,9 +8,12 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { LOOKBOOK_SLIDES } from "@/constants/home-content";
 import { Container } from "@/components/common/container";
-import { Eyebrow, Heading } from "@/components/common/typography";
+import { Eyebrow, Heading, Body } from "@/components/common/typography";
+import { Button } from "@/components/ui/button";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
@@ -97,14 +100,20 @@ export function HorizontalLookbook() {
   return (
     <section ref={targetRef} className="relative h-[320vh]">
       <div className="sticky top-0 flex h-[100dvh] flex-col justify-center overflow-hidden bg-background">
-        <Container className="mb-10 flex items-end justify-between">
-          <div>
+        <Container className="mb-8 flex flex-col gap-4 md:mb-10 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
             <Eyebrow>Lookbook</Eyebrow>
             <Heading className="mt-3">Spring Narratives</Heading>
+            <Body className="mt-3">
+              Nine visual chapters from our SS26 campaign — shot across New York in golden hour and early morning light.
+            </Body>
           </div>
-          <p className="hidden text-xs uppercase tracking-editorial text-muted-foreground md:block">
-            Scroll to journey →
-          </p>
+          <Button variant="outline" size="sm" asChild className="shrink-0">
+            <Link href="/lookbook">
+              Full Lookbook
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
         </Container>
 
         <motion.div
@@ -178,12 +187,12 @@ function LookbookSlide({
           src={`https://images.unsplash.com/${slide.image}?w=800&q=85&auto=format&fit=crop`}
           alt={slide.title}
           fill
-          className="object-cover transition-luxury duration-700 group-hover:scale-[1.05]"
+          className="image-hover-zoom-emphasis"
           sizes="400px"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-80" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
-          <p className="text-[10px] uppercase tracking-editorial text-background/60">
+          <p className="text-micro-caps text-background/60">
             Look {slide.id}
           </p>
           <h3 className="mt-2 font-display text-2xl font-light text-background md:text-3xl">

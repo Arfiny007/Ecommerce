@@ -6,6 +6,7 @@ import { ProductBreadcrumb } from "@/components/product/product-breadcrumb";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductPurchasePanel } from "@/components/product/product-purchase-panel";
 import { ProductDetailsAccordion } from "@/components/product/product-details-accordion";
+import { ProductEditorialSections } from "@/components/product/product-editorial-sections";
 import { ProductReviewsSection } from "@/components/product/product-reviews-section";
 import { ProductRecommendations } from "@/components/product/product-recommendations";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
@@ -24,7 +25,7 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
 
   return (
     <>
-      <div className="pt-20 md:pt-24">
+      <div className="page-content-offset">
         <Container>
           <ProductBreadcrumb product={product} />
 
@@ -39,6 +40,7 @@ export function ProductPageContent({ product }: ProductPageContentProps) {
         </Container>
       </div>
 
+      <ProductEditorialSections product={product} />
       <ProductDetailsAccordion product={product} />
       <ProductReviewsSection product={product} />
       <ProductRecommendations product={product} />

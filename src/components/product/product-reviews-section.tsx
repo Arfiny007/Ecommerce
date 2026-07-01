@@ -44,7 +44,7 @@ function ReviewCard({ review }: { review: ProductReview }) {
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium">{review.author}</span>
             {review.verified && (
-              <Badge variant="outline" className="gap-1 text-[10px]">
+              <Badge variant="outline" className="gap-1 text-micro">
                 <BadgeCheck className="h-3 w-3" />
                 Verified
               </Badge>
@@ -112,7 +112,7 @@ export function ProductReviewsSection({ product }: ProductReviewsSectionProps) {
   const totalReviews = allReviews.length;
 
   return (
-    <section className="border-t border-border-subtle py-16 md:py-20" aria-label="Customer reviews">
+    <section className="border-t border-border-subtle py-[var(--section-py-md)] md:py-[var(--section-py-lg)]" aria-label="Customer reviews">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">

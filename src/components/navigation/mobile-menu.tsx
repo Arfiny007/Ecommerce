@@ -34,7 +34,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-background p-6 shadow-2xl lg:hidden"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium uppercase tracking-[0.2em]">
+              <span className="label-caps text-foreground">
                 Menu
               </span>
               <Button variant="ghost" size="icon" onClick={onClose}>

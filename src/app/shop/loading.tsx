@@ -5,7 +5,7 @@ import { ShopLoadingSkeleton } from "@/components/shop/shop-loading-skeleton";
 export default function ShopRouteLoading() {
   return (
     <>
-      <div className="border-b border-border-subtle bg-surface-muted pt-24 pb-10 md:pt-32 md:pb-14">
+      <div className="page-hero border-b border-border-subtle bg-surface-muted">
         <Container>
           <Skeleton className="h-4 w-16" />
           <Skeleton className="mt-3 h-10 w-64" />

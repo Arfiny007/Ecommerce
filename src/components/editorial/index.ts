@@ -1,0 +1,12 @@
+export { EditorialQuote } from "./editorial-quote";
+export { ImageWithCaption } from "./image-with-caption";
+export { FeatureColumns } from "./feature-columns";
+export type { FeatureColumn } from "./feature-columns";
+export { BrandNumbers } from "./brand-numbers";
+export { CampaignBanner } from "./campaign-banner";
+export { MagazineGrid } from "./magazine-grid";
+export { ImageCollage } from "./image-collage";
+export { JournalPreview } from "./journal-preview";
+export { MaterialShowcase } from "./material-showcase";
+export { InstagramGallery } from "./instagram-gallery";
+export { EditorialDivider } from "./editorial-divider";

@@ -21,7 +21,7 @@ export function ProductColorSelector({
 
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-[0.15em]">
+      <p className="label-caps">
         Color —{" "}
         <motion.span
           key={selected.name}
@@ -79,7 +79,7 @@ export function ProductSizeSelector({
 
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-[0.15em]">Size</p>
+      <p className="label-caps">Size</p>
       <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Size selection">
         {sizes.map((size) => {
           const isSelected = selected.label === size.label;
@@ -127,7 +127,7 @@ export function ProductQuantitySelector({
 }: ProductQuantitySelectorProps) {
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-[0.15em]">Quantity</p>
+      <p className="label-caps">Quantity</p>
       <div
         className="mt-3 inline-flex items-center rounded-[var(--radius-full)] border border-border"
         role="group"

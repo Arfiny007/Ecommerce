@@ -15,7 +15,7 @@ export function ErrorFallback({
 }: ErrorFallbackProps) {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center text-center">
-      <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
+      <p className="label-caps text-muted-foreground">
         Error
       </p>
       <h1 className="mt-4 font-display text-3xl font-light md:text-4xl">{title}</h1>

@@ -137,7 +137,7 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
             )}
             aria-hidden
           />
-          <span className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+          <span className="label-caps-muted">
             {stockLabel}
           </span>
         </div>
@@ -247,7 +247,7 @@ export function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
         ].map(({ icon: Icon, label }) => (
           <div key={label} className="flex flex-col items-center gap-2 text-center">
             <Icon className="h-4 w-4 text-muted-foreground" aria-hidden />
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-micro-caps text-muted-foreground">
               {label}
             </span>
           </div>

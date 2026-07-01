@@ -22,7 +22,7 @@ export function ShopEmptyState({ onClearFilters, hasFilters }: ShopEmptyStatePro
       initial={reducedMotion ? false : "hidden"}
       animate="visible"
       variants={fadeInUp}
-      className="flex flex-col items-center justify-center py-24 text-center"
+      className="section-empty flex flex-col items-center justify-center text-center"
       role="status"
     >
       <NoResultsIllustration />

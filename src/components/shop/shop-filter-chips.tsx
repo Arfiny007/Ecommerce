@@ -29,14 +29,14 @@ export function ShopFilterChips({ chips, onRemove, onClearAll }: ShopFilterChips
       className="space-y-3"
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
+        <p className="label-caps text-muted-foreground">
           {chips.length} active filter{chips.length !== 1 ? "s" : ""}
         </p>
         <Button
           variant="ghost"
           size="sm"
           onClick={onClearAll}
-          className="h-auto px-0 text-xs uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground"
+          className="label-caps-muted h-auto px-0 transition-luxury hover:text-foreground"
         >
           {emptyStates.productsCta}
         </Button>

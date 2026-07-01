@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductLoading() {
   return (
-    <Container className="py-24 md:py-32">
+    <Container className="section-empty md:py-[var(--section-py-lg)]">
       <Skeleton className="h-4 w-48" />
       <div className="mt-8 grid gap-12 lg:grid-cols-2">
         <Skeleton className="aspect-[3/4] w-full rounded-[var(--radius-2xl)]" />

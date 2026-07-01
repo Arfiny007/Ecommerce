@@ -87,7 +87,7 @@ export function CheckoutPageContent() {
 
   if (items.length === 0 && step !== "success") {
     return (
-      <Container className="flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+      <Container className="section-empty flex min-h-[60vh] flex-col items-center justify-center text-center">
         <h1 className="font-display text-3xl font-light">Your bag is empty</h1>
         <p className="mt-3 text-muted-foreground">
           Add items to your bag before checking out.

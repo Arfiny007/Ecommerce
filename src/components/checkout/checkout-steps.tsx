@@ -47,7 +47,7 @@ export function CheckoutSteps({ current, className }: CheckoutStepsProps) {
                 </div>
                 <span
                   className={cn(
-                    "hidden text-[10px] uppercase tracking-[0.12em] sm:block",
+                    "label-caps-muted hidden sm:block",
                     isCurrent ? "font-medium text-foreground" : "text-muted-foreground"
                   )}
                 >

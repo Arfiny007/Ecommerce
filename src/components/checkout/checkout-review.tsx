@@ -38,7 +38,7 @@ export function CheckoutReview({ items, subtotal, shipping }: CheckoutReviewProp
       className="space-y-8"
     >
       <section aria-labelledby="review-shipping">
-        <h3 id="review-shipping" className="mb-3 text-xs uppercase tracking-[0.12em] text-muted-foreground">
+        <h3 id="review-shipping" className="label-caps-muted mb-3">
           Shipping to
         </h3>
         <address className="not-italic text-sm leading-relaxed">
@@ -59,7 +59,7 @@ export function CheckoutReview({ items, subtotal, shipping }: CheckoutReviewProp
       </section>
 
       <section aria-labelledby="review-items">
-        <h3 id="review-items" className="mb-4 text-xs uppercase tracking-[0.12em] text-muted-foreground">
+        <h3 id="review-items" className="label-caps-muted mb-4">
           Items ({items.reduce((s, i) => s + i.quantity, 0)})
         </h3>
         <ul className="space-y-4">

@@ -118,7 +118,7 @@ export function PremiumImage({
           fill
           className={cn(
             "object-cover transition-luxury",
-            zoomOnHover && "group-hover:scale-[1.05]",
+            zoomOnHover && "image-hover-zoom-emphasis",
             !loaded && "opacity-0",
             loaded && "opacity-100",
             className

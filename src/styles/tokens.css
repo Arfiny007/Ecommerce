@@ -38,6 +38,8 @@
   --overlay: rgb(10 10 10 / 0.55);
 
   /* ── Typography Scale ── */
+  --text-micro: 0.625rem;
+  --text-caption: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -60,6 +62,7 @@
   --tracking-wide: 0.04em;
   --tracking-wider: 0.08em;
   --tracking-widest: 0.15em;
+  --tracking-caps: 0.12em;
   --tracking-editorial: 0.2em;
 
   --prose-width: 42rem;
@@ -135,10 +138,21 @@
   --container-wide: 90rem;
   --container-full: 100%;
 
-  /* ── Section Spacing ── */
-  --section-py-sm: clamp(3rem, 6vw, 4rem);
-  --section-py-md: clamp(4rem, 8vw, 6rem);
-  --section-py-lg: clamp(5rem, 10vw, 8rem);
+  /* ── Section Spacing (tighter for editorial density) ── */
+  --section-py-sm: clamp(2.5rem, 5vw, 3.5rem);
+  --section-py-md: clamp(3rem, 6vw, 4.5rem);
+  --section-py-lg: clamp(3.5rem, 7vw, 5.5rem);
+
+  /* ── Page Hero ── */
+  --page-hero-pt: clamp(6rem, 12vw, 8rem);
+  --page-hero-pb: clamp(2.5rem, 5vw, 3.5rem);
+  --page-content-pt: clamp(5rem, 10vw, 6rem);
+
+  /* ── Interactive ── */
+  --icon-btn-size: 2.25rem;
+  --image-hover-scale: 1.03;
+  --image-hover-scale-subtle: 1.02;
+  --image-hover-scale-emphasis: 1.05;
 
   /* ── Grid ── */
   --grid-gap: clamp(1rem, 2vw, 1.5rem);

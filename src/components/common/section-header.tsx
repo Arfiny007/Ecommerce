@@ -30,7 +30,7 @@ export function SectionHeader({
         className
       )}
     >
-      <div className={cn("space-y-[var(--space-3)]", isCenter && "max-w-2xl")}>
+      <div className={cn("space-y-[var(--space-3)]", isCenter && "prose-width-narrow mx-auto")}>
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         {title && (
           <Heading as="h2" className={cn(isCenter && "mx-auto")}>

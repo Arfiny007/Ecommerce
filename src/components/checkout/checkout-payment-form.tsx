@@ -60,7 +60,7 @@ export function CheckoutPaymentForm() {
             <button
               type="button"
               onClick={() => setSelectedCardId(null)}
-              className="text-xs uppercase tracking-[0.12em] text-muted-foreground transition-luxury hover:text-foreground"
+              className="label-caps-muted transition-luxury hover:text-foreground"
             >
               Use a new card
             </button>

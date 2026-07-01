@@ -63,7 +63,7 @@ export function Navbar() {
                   onMouseEnter={() =>
                     item.children ? setActiveMenu(item.label) : setActiveMenu(null)
                   }
-                  className="group relative text-xs font-medium uppercase tracking-[0.15em] transition-colors hover:text-muted-foreground"
+                  className="group relative label-caps transition-colors hover:text-muted-foreground"
                   data-cursor="link"
                 >
                   {item.children ? (
@@ -100,7 +100,7 @@ export function Navbar() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] text-background"
+                      className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-micro text-background"
                     >
                       {wishlistCount}
                     </motion.span>
@@ -122,7 +122,7 @@ export function Navbar() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
-                    className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] text-background"
+                    className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-micro text-background"
                   >
                     {itemCount}
                   </motion.span>

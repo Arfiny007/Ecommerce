@@ -106,7 +106,7 @@ export const ShopProductCard = memo(function ShopProductCard({
             e.preventDefault();
             toggleWishlist(product.id);
           }}
-          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105"
+          className="flex icon-action surface-glass shadow-soft hover:scale-105"
           aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
           aria-pressed={wishlisted}
         >
@@ -127,7 +127,7 @@ export const ShopProductCard = memo(function ShopProductCard({
             e.preventDefault();
             onQuickView(product);
           }}
-          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105"
+          className="flex icon-action surface-glass shadow-soft hover:scale-105"
           aria-label={`Quick view ${product.name}`}
         >
           <Eye className="h-4 w-4" />
@@ -138,7 +138,7 @@ export const ShopProductCard = memo(function ShopProductCard({
             toggleCompare(product.id);
           }}
           className={cn(
-            "flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105",
+            "icon-action surface-glass shadow-soft",
             compared && "ring-1 ring-foreground"
           )}
           aria-label={compared ? "Remove from compare" : "Add to compare"}

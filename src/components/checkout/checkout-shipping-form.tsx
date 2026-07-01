@@ -107,7 +107,7 @@ export function CheckoutShippingForm({
       className="space-y-6"
     >
       <div>
-        <p className="mb-3 text-xs uppercase tracking-[0.12em] text-muted-foreground">
+        <p className="label-caps-muted mb-3">
           Saved addresses
         </p>
         <div className="flex flex-wrap gap-2">

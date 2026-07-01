@@ -141,7 +141,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
                     alt={`${product.name} — image ${selectedIndex + 1}`}
                     fill
                     className={cn(
-                      "object-cover transition-transform duration-500 ease-[var(--ease-luxury)]",
+                      "object-cover transition-luxury",
                       isZooming && !reducedMotion && "scale-150"
                     )}
                     style={
@@ -168,14 +168,14 @@ export function ProductGallery({ product }: ProductGalleryProps) {
               <>
                 <button
                   onClick={goPrev}
-                  className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105 md:hidden"
+                  className="icon-action absolute left-3 top-1/2 -translate-y-1/2 surface-glass shadow-soft md:hidden"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
                   onClick={goNext}
-                  className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105 md:hidden"
+                  className="icon-action absolute right-3 top-1/2 -translate-y-1/2 surface-glass shadow-soft md:hidden"
                   aria-label="Next image"
                 >
                   <ChevronRight className="h-4 w-4" />

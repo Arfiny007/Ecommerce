@@ -31,7 +31,7 @@ interface FilterPanelProps {
 
 function FilterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-xs font-medium uppercase tracking-[0.15em]">{children}</h3>
+    <h3 className="label-caps">{children}</h3>
   );
 }
 

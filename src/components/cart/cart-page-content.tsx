@@ -113,7 +113,7 @@ export function CartPageContent() {
 
   if (items.length === 0) {
     return (
-      <Container className="flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
+      <Container className="section-empty flex min-h-[60vh] flex-col items-center justify-center text-center">
         <motion.div
           variants={reducedMotion ? undefined : fadeInUp}
           initial={reducedMotion ? false : "hidden"}

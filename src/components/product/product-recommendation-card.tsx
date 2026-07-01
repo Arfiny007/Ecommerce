@@ -89,7 +89,7 @@ export const ProductRecommendationCard = memo(function ProductRecommendationCard
           <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition-luxury group-hover:opacity-100 group-focus-within:opacity-100">
             <button
               onClick={() => toggleWishlist(product.id)}
-              className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105"
+              className="icon-action surface-glass shadow-soft"
               aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
               aria-pressed={wishlisted}
             >
@@ -108,7 +108,7 @@ export const ProductRecommendationCard = memo(function ProductRecommendationCard
             <button
               onClick={() => toggleCompare(product.id)}
               className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105",
+                "icon-action surface-glass shadow-soft",
                 compared && "ring-1 ring-foreground"
               )}
               aria-label={compared ? "Remove from compare" : "Add to compare"}

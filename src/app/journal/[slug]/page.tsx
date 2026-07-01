@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/common/container";
+import { ContentPageHero } from "@/components/content/content-page-hero";
 import { Section } from "@/components/common/section";
-import { Eyebrow, Heading } from "@/components/common/typography";
+import { Container } from "@/components/common/container";
+import { Caption } from "@/components/common/typography";
 import { Button } from "@/components/ui/button";
 import { getJournalArticle, getJournalSlugs } from "@/constants/content/journal";
 import { createPageMetadata } from "@/lib/metadata";
@@ -35,15 +36,11 @@ export default async function JournalArticlePage({ params }: JournalArticlePageP
 
   return (
     <>
-      <div className="border-b border-border-subtle bg-surface-muted pt-24 pb-10 md:pt-32 md:pb-14">
-        <Container size="narrow">
-          <Eyebrow>{article.category}</Eyebrow>
-          <Heading className="mt-3">{article.title}</Heading>
-          <p className="mt-4 text-sm text-muted-foreground">
-            {article.author} · {article.date} · {article.readTime}
-          </p>
-        </Container>
-      </div>
+      <ContentPageHero eyebrow={article.category} title={article.title} size="narrow">
+        <Caption className="mt-4 text-foreground/70">
+          {article.author} · {article.date} · {article.readTime}
+        </Caption>
+      </ContentPageHero>
       <Section spacing="md">
         <Container size="narrow">
           <div className="relative mb-12 aspect-[21/9] overflow-hidden rounded-[var(--radius-2xl)]">

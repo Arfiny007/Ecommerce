@@ -81,7 +81,7 @@ export function PaymentMethodSelector({
 
       {selected === "card" && savedCards.length > 0 && (
         <div className="space-y-2 border-t border-border-subtle pt-4">
-          <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+          <p className="label-caps-muted">
             Saved cards
           </p>
           {savedCards.map((card) => (

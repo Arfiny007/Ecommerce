@@ -46,7 +46,7 @@ export function ShopPriceSlider({ value, onChange }: ShopPriceSliderProps) {
         onValueChange={(v) => onChange(v as [number, number])}
         aria-label="Price range"
       />
-      <div className="mt-3 flex justify-between text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+      <div className="mt-3 flex justify-between text-micro-caps text-muted-foreground">
         <span>{formatPrice(0)}</span>
         <span>{formatPrice(SHOP_MAX_PRICE)}</span>
       </div>

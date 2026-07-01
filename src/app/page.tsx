@@ -1,11 +1,12 @@
 import { HeroSection } from "@/components/home/hero-section";
-import { FeaturedCollections } from "@/components/home/featured-collections";
-import { FeaturedProducts } from "@/components/home/featured-products";
+import { CampaignStorySection } from "@/components/home/campaign-story-section";
+import { AtelierSection } from "@/components/home/atelier-section";
 import { HorizontalLookbook } from "@/components/home/horizontal-lookbook";
-import { EditorialStorySection } from "@/components/home/editorial-story-section";
-import { BrandStory } from "@/components/home/brand-story-section";
+import { ManifestoSection } from "@/components/home/manifesto-section";
+import { JournalPreviewSection } from "@/components/home/journal-preview-section";
+import { HeritageSection } from "@/components/home/heritage-section";
 import { BestSellers } from "@/components/home/best-sellers-section";
-import { Testimonials } from "@/components/home/testimonials-carousel";
+import { VoicesSection } from "@/components/home/voices-section";
 import { NewsletterSection } from "@/components/home/newsletter-section";
 import { baseMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/constants/site";
@@ -15,17 +16,22 @@ export const metadata = {
   alternates: { canonical: SITE_URL },
 };
 
+/**
+ * Homepage sections — each with a distinct layout:
+ * Hero → Campaign → Atelier → Lookbook → Manifesto → Journal → Heritage → Best Sellers → Voices → Newsletter
+ */
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <FeaturedCollections />
-      <FeaturedProducts />
+      <CampaignStorySection />
+      <AtelierSection />
       <HorizontalLookbook />
-      <EditorialStorySection />
-      <BrandStory />
+      <ManifestoSection />
+      <JournalPreviewSection />
+      <HeritageSection />
       <BestSellers />
-      <Testimonials />
+      <VoicesSection />
       <NewsletterSection />
     </>
   );

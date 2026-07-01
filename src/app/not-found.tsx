@@ -15,7 +15,7 @@ export const metadata = createPageMetadata({
 
 export default function NotFound() {
   return (
-    <Container className="flex min-h-[70vh] flex-col items-center justify-center text-center">
+    <Container className="section-empty flex min-h-[70vh] flex-col items-center justify-center text-center">
       <NotFoundIllustration />
       <Eyebrow className="mt-8">{NOT_FOUND_PAGE.eyebrow}</Eyebrow>
       <Heading className="mt-4">{NOT_FOUND_PAGE.title}</Heading>

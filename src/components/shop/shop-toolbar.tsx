@@ -48,7 +48,7 @@ export function ShopToolbar({
             <SlidersHorizontal className="h-4 w-4" />
             Filters
             {activeFilterCount > 0 && (
-              <span className="flex h-5 min-w-5 items-center justify-center rounded-[var(--radius-full)] bg-foreground px-1.5 text-[10px] text-background">
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-[var(--radius-full)] bg-foreground px-1.5 text-micro text-background">
                 {activeFilterCount}
               </span>
             )}

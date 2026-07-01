@@ -70,7 +70,7 @@ function BestSellerCard({ product }: { product: Product }) {
           <div className="absolute right-4 top-4 flex flex-col gap-2 opacity-0 transition-luxury group-hover:opacity-100">
             <button
               onClick={() => toggleWishlist(product.id)}
-              className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105"
+              className="flex icon-action surface-glass shadow-soft"
               aria-label={isWishlisted(product.id) ? "Remove from wishlist" : "Add to wishlist"}
             >
               <motion.div
@@ -87,7 +87,7 @@ function BestSellerCard({ product }: { product: Product }) {
             </button>
             <Link
               href={`/product/${product.slug}`}
-              className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] surface-glass shadow-soft transition-luxury hover:scale-105"
+              className="flex icon-action surface-glass shadow-soft"
               aria-label={`View ${product.name}`}
             >
               <Eye className="h-4 w-4" />
@@ -121,12 +121,26 @@ export function BestSellers() {
 
   return (
     <Section
-      spacing="lg"
+      spacing="md"
       eyebrow="Popular"
       title="Best Sellers"
-      description="The pieces our community returns to — season after season."
+      description="The pieces our community returns to — season after season, city after city."
       action={<SectionLinkAction href="/shop?sort=popular" label="View All" />}
     >
+      <div className="mb-8 grid gap-4 rounded-[var(--radius-2xl)] border border-border-subtle bg-surface-muted p-6 md:grid-cols-3">
+        <div>
+          <p className="font-display text-2xl font-light">4.9</p>
+          <p className="text-xs text-muted-foreground">Average rating</p>
+        </div>
+        <div>
+          <p className="font-display text-2xl font-light">2,400+</p>
+          <p className="text-xs text-muted-foreground">Five-star reviews</p>
+        </div>
+        <div>
+          <p className="font-display text-2xl font-light">68%</p>
+          <p className="text-xs text-muted-foreground">Repeat purchasers</p>
+        </div>
+      </div>
       <MotionStagger className="grid grid-cols-2 gap-[var(--grid-gap)] lg:grid-cols-4">
         {products.map((product) => (
           <BestSellerCard key={product.id} product={product} />

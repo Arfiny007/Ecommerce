@@ -111,7 +111,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-noise" aria-hidden />
       </motion.div>
 
-      <Container className="relative z-raised flex min-h-[100dvh] items-end pb-24 pt-28 lg:items-center lg:pb-0">
+      <Container className="relative z-raised flex min-h-[100dvh] flex-col justify-end pb-20 pt-28 lg:justify-center lg:pb-0">
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
           className="grid w-full items-end gap-12 lg:grid-cols-12 lg:items-center lg:gap-8"
@@ -211,7 +211,7 @@ export function HeroSection() {
                       </div>
                       <div className="mt-3 px-1 pb-1">
                         <p className="text-xs font-medium text-background">{product.name}</p>
-                        <p className="text-[10px] text-background/60">
+                        <p className="text-micro text-background/60">
                           {formatPrice(product.price)}
                         </p>
                       </div>
@@ -223,7 +223,7 @@ export function HeroSection() {
               <motion.div
                 animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute bottom-8 left-0 surface-glass rounded-[var(--radius-full)] px-4 py-2 text-[10px] uppercase tracking-editorial text-background/80"
+                className="absolute bottom-8 left-0 surface-glass rounded-[var(--radius-full)] px-4 py-2 text-micro-caps text-background/80"
               >
                 SS26 — Now Available
               </motion.div>
@@ -241,7 +241,7 @@ export function HeroSection() {
           aria-hidden
         >
           <div className="flex flex-col items-center gap-3">
-            <span className="text-[10px] uppercase tracking-editorial text-background/50">
+            <span className="text-micro-caps text-background/50">
               Scroll to explore
             </span>
             <motion.div

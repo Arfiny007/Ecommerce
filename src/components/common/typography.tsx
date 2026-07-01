@@ -132,3 +132,28 @@ export function Caption({
     </p>
   );
 }
+
+export function LabelCaps({
+  className,
+  as: Tag = "span",
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLElement> & { as?: "span" | "p" | "h3" | "h4" }) {
+  return (
+    <Tag className={cn("label-caps text-foreground", className)} {...props}>
+      {children}
+    </Tag>
+  );
+}
+
+export function MicroLabel({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span className={cn("text-micro-caps text-muted-foreground", className)} {...props}>
+      {children}
+    </span>
+  );
+}

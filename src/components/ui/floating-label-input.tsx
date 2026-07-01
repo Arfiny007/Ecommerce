@@ -56,7 +56,7 @@ const FloatingLabelInput = React.forwardRef<
         className={cn(
           "pointer-events-none absolute left-4 origin-left text-muted-foreground transition-luxury",
           floated
-            ? "top-2 text-[10px] uppercase tracking-[0.12em]"
+            ? "top-2 text-micro-caps"
             : "top-1/2 -translate-y-1/2 text-sm"
         )}
       >

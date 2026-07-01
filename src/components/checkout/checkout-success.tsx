@@ -57,7 +57,7 @@ export function CheckoutSuccess({ orderNumber, total, items }: CheckoutSuccessPr
       <p className="mt-3 text-muted-foreground">{checkoutCopy.successSubtitle}</p>
 
       <div className="mt-8 rounded-[var(--radius-2xl)] border border-border-subtle p-6 text-left surface-elevated">
-        <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+        <p className="label-caps-muted">
           {checkoutCopy.successOrderNumber}
         </p>
         <p className="mt-1 font-display text-2xl font-light">{orderNumber}</p>
@@ -72,7 +72,7 @@ export function CheckoutSuccess({ orderNumber, total, items }: CheckoutSuccessPr
       </div>
 
       <div className="mt-10 text-left">
-        <h2 className="mb-6 text-center text-xs uppercase tracking-[0.15em] text-muted-foreground">
+        <h2 className="label-caps mb-6 text-center text-muted-foreground">
           Order timeline
         </h2>
         <ol className="space-y-0" aria-label="Order status timeline">
@@ -114,7 +114,7 @@ export function CheckoutSuccess({ orderNumber, total, items }: CheckoutSuccessPr
       </div>
 
       <div className="mt-6 rounded-[var(--radius-xl)] border border-border-subtle p-4 text-left text-sm">
-        <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+        <p className="label-caps-muted">
           Receipt preview
         </p>
         <ul className="mt-3 space-y-2">
